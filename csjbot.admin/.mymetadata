@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ecp.based"
+  id="myeclipse.1468397190280"
+  context-root="/mvcdemo"
+  j2ee-spec="1.7"
+  archive="ecp.based.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
