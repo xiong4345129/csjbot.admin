@@ -3,8 +3,8 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.bravowhale.ecp</groupId>
-  <artifactId>ecp.demo</artifactId>
+  <groupId>com.csjbot</groupId>
+  <artifactId>csjbot.admin</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -79,7 +79,7 @@
       </plugin>
     </plugins>      
     
-    <finalName>mvcdemo</finalName>
+    <finalName>admin</finalName>
 	<resources>
 		<resource>
 			<directory>src/main/java</directory>
@@ -104,8 +104,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <name>ecp.based</name>
-  <url>http://maven.apache.org</url>
   <dependencies>
     <!-- spring 相关 jar包 -->
     <dependency>
