@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * 
  * 
  * 
- * @author xiaoming
+ * @author cjay
  * 
  */
 public class Role implements Serializable {

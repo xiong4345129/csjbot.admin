@@ -1,7 +1,7 @@
 /**
  * To serialize form data to JSON object or JSON string.
  * 
- * @author xiaoming
+ * @author cjay
  */
 (function($) {
 

@@ -1,9 +1,9 @@
 /**
  * 
- * @author xiaoming
+ * @author cjay
  */
 
-bravoui.ui = bravoui.ui || {};
+csjbotui.ui = csjbotui.ui || {};
 
 /**
  * define
@@ -13,11 +13,86 @@ bravoui.ui = bravoui.ui || {};
 	BUI.ui.msg = BUI.ui.msg || {};
 
 	BUI.ui.msg.alert = function(options) {
-
-		var msg = '<div class="modal"><div class="modal-dialog"><div class="modal-content">' + '<div class="modal-header"><button type="button" class="close" id="closeModal" data-dismiss="modal"><span>&times;</span></button><h4 class="modal-title"></h4></div>' + '<div class="modal-body"></div>' + '<div class="modal-footer"><button type="button" class="btn btn-default" id="closeModal" data-dismiss="modal" >Ok</button></div>'
+		if($("#alertModalId")){
+			$("#alertModalId").remove();
+		}
+		var msg = '<div class="modal" id="alertModalId"><div class="modal-dialog"><div class="modal-content">' 
+				+ '<div class="modal-header"><button type="button" class="close"  data-dismiss="modal" id="closeModal" ><span>&times;</span></button><h4 class="modal-title"></h4></div>' 
+				+ '<div class="modal-body" style="overflow: auto;min-height: 100px;max-height: 450px;"></div>' 
+				+ '<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button></div>'
 				+ '</div></div></div>';
 
 		msg = $(msg).modal({
+			backdrop : 'static'
+		});
+		// --------------------------------------------------------------------------------------------------------------------------------------------------------------
+		var _msg = "", _title = "";
+		if (typeof options == 'string' || typeof options == 'int') {
+			_title = "提示信息";
+			_msg = options;
+		} else {
+			if (!options.title) {
+				_title = "提示信息";
+			} else {
+				_title = options.title;
+			}
+			_msg = options.msg;
+		}
+		if (options.ok && (typeof options.ok == 'function') ) {
+			$("#alertModalId").off("hidden.bs.modal").on("hidden.bs.modal", options.ok);
+		}
+		$(msg).find(".modal-title").append(_title);
+		$(msg).find(".modal-body").append(_msg);
+		// --------------------------------------------------------------------------------------------------------------------------------------------------------------
+		$(msg).find("button").click(function() {
+			$("#alertModalId").modal("hide");
+		});
+	};
+
+	BUI.ui.msg.confirm = function(options) {
+		if($("#confirmModal")){
+			$("#confirmModal").remove();
+		}
+		var msg = '<div id="confirmModal" class="modal"><div class="modal-dialog"><div class="modal-content">' 
+				+ '<div class="modal-header"><button type="button" class="close" id="closeModal" data-dismiss="modal"><span>&times;</span></button><h4 class="modal-title"></h4></div>' 
+				+ '<div class="modal-body" style="overflow: auto;min-height: 100px;max-height: 450px;"></div>' 
+				+ '<div class="modal-footer"><button type="button" id="confirmBtn" class="btn btn-primary">确 定</button>'
+				+ '&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-default" data-dismiss="modal" >取 消</button></div>'
+				+ '</div></div></div>';
+
+		msg = $(msg).modal({
+			backdrop : 'static'
+		});
+		// --------------------------------------------------------------------------------------------------------------------------------------------------------------
+		var _msg = "", _title = "";
+		if (typeof options == 'string' || typeof options == 'int') {
+			_title = "提示信息";
+			_msg = options;
+		} else {
+			_title = options.title;
+			_msg = options.msg;
+		}
+		if (options.ok && (typeof options.ok == 'function') ) {
+			$(msg).find("#confirmBtn").click(options.ok);
+		}
+		$(msg).find(".modal-title").append(_title);
+		$(msg).find(".modal-body").append(_msg);
+		// --------------------------------------------------------------------------------------------------------------------------------------------------------------
+		$(msg).find("button").click(function() {
+			$("#confirmModal").modal("hide");
+		});
+	};
+	
+	BUI.ui.msg.waiting = function(options) {
+		if($("#waitingModal")){
+			$("#waitingModal").remove();
+		}
+		var msg = '<div id="waitingModal" class="modal waitingModal"><div class="modal-dialog"><div class="modal-content" >' 
+				+ '<div class="modal-header"><h2 class="modal-title" id="modalTitle"></h2></div>' 
+				+ '<div class="modal-body"><h4 id="modalBody"></h4></div>'
+				+ '</div></div></div>';
+		$("body").append(msg);
+		$("#waitingModal").modal({
 			backdrop : 'static'
 		});
 		// --------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,15 +104,16 @@ bravoui.ui = bravoui.ui || {};
 			_title = options.title;
 			_msg = options.msg;
 		}
-		$(msg).find(".modal-title").append(_title);
-		$(msg).find(".modal-body").append(_msg);
-		// --------------------------------------------------------------------------------------------------------------------------------------------------------------
-		$(msg).find("button").click(function() {
-			$(msg).remove();
-		});
+		$("#waitingModal").find("#modalTitle").html(_title);
+		$("#waitingModal").find("#modalBody").html(_msg);
 	};
+	BUI.ui.msg.waiting.remove = function(){
+		$(".waitingModal").modal("hide");
+	};
+	
+	
+}(jQuery, csjbotui));
 
-}(jQuery, bravoui));
 
 (function($, BUI) {
 
@@ -98,13 +174,13 @@ bravoui.ui = bravoui.ui || {};
 		}
 		// --------------------------------------------------------------------------------------------------------------------------------------------------------------
 		$(win).find(".comment").unbind("keyup").keyup(function(){
-			if(!bravoui.isEmpty(this.value)) $(win).find(".error-tip").empty();
+			if(!csjbotui.isEmpty(this.value)) $(win).find(".error-tip").empty();
 			else $(win).find(".error-tip").empty().append(options.requiredMsg);
 		});
 		// --------------------------------------------------------------------------------------------------------------------------------------------------------------
 		win.validate = function(){
 			var comment = $(win).find(".comment").val();
-			if(bravoui.isEmpty(comment)) {
+			if(csjbotui.isEmpty(comment)) {
 				$(win).find(".error-tip").empty().append(options.requiredMsg);
 				// --------------------------------------------------------------------------------------------------------------------------------------------------------------
 				return false;
@@ -129,4 +205,4 @@ bravoui.ui = bravoui.ui || {};
 		});
 	};
 
-}(jQuery, bravoui));
+}(jQuery, csjbotui));

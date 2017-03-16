@@ -37,8 +37,8 @@ import="java.text.SimpleDateFormat"
                             <a href="${path}/">首页</a>
                         </li>
                         <li class="active">系统配置</li>
-                        <li><a href="${path}/sys/admin/list">系统管理员</a></li>
-                        <li class="active">系统管理员改密</li>
+                        <li><a href="${path}/sys/admin/list">账号管理</a></li>
+                        <li class="active">账号改密</li>
                     </ul><!-- .breadcrumb -->
                 </div>
             
@@ -50,7 +50,7 @@ import="java.text.SimpleDateFormat"
 			                    <tr>
 			                           <td style="width: 4%;text-align: left;" nowrap="nowrap" >
 			                            <a  class="btn btn-primary" type="button" href="${path }/sys/admin/list" >返回</a></td>
-			                            <td class="panel-title" style="width: 96%;text-align: center;font-weight:bold">系统管理员改密</td>
+			                            <td class="panel-title" style="width: 96%;text-align: center;font-weight:bold">账号改密</td>
 			                       </tr>
 			               </table>
 			            </div>

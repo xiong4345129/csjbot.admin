@@ -12,67 +12,41 @@
     <jsp:include page="../common/meta.jsp" />
     <jsp:include page="../common/resources.jsp" />
     <script src="${path }/scripts/sys/sys_admin_list.js" ></script>
-    <script src="${path }/scripts/plugins/mask/jquery.bravoui.mask.js" ></script>
-    <script src="${path }/scripts/plugins/datatable/jquery.bravoui.datatable.js" ></script>
+    <script src="${path }/scripts/plugins/mask/jquery.csjbotui.mask.js" ></script>
+    <script src="${path }/scripts/plugins/datatable/jquery.csjbotui.datatable.js" ></script>
     <script>
     function operation (data, el) {
         <% 
-        if(subject.isPermittedAll("sys.administrator:read")) {
+        if(subject.isPermittedAll("modify:account_management")) {
         %>
-        var $editor= $("<a class=\"detail\" href=\"javascript:void(0);\"><span>详情</span></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-        $(el).append($editor);
-        $(el).find(".detail").unbind("click").click(function(){
-            window.location = _path + "/sys/admin/" + data.id+"/toSysAdminDetail";
-        });
-        <% 
-        }
-        if(subject.isPermittedAll("sys.administrator:password")) {
-        %>
-        $editor = $("<a class=\"change\" href=\"javascript:void(0);\"><span>改密</span></a>&nbsp;&nbsp;&nbsp;&nbsp;");
-        $(el).append($editor);
-        $(el).find(".change").unbind("click").click(function(){
-            window.location = _path + "/sys/admin/" + data.id+"/toSysAdminPasswordChange";
-        });
-        <% 
-        }
-        if(subject.isPermittedAll("sys.administrator:update")) {
-        %>
-        $editor = $("<a class=\"edit\" href=\"javascript:void(0);\"><span>编辑</span></a>");
-        $(el).append($editor);
-        $(el).find(".edit").unbind("click").click(function(){
-            window.location = _path + "/sys/admin/" + data.id+"/toSysAdminEdit";
-        });
+	        var $editor= $("<a class=\"detail opt\" href=\"javascript:void(0);\"><span>详情</span></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+	        $(el).append($editor);
+	        $(el).find(".detail").unbind("click").click(function(){
+	            window.location = _path + "/sys/admin/" + data.id+"/toSysAdminDetail";
+	        });
+	        $editor = $("<a class=\"change opt\" href=\"javascript:void(0);\"><span>改密</span></a>&nbsp;&nbsp;&nbsp;&nbsp;");
+	        $(el).append($editor);
+	        $(el).find(".change").unbind("click").click(function(){
+	            window.location = _path + "/sys/admin/" + data.id+"/toSysAdminPasswordChange";
+	        });
+	        $editor = $("<a class=\"edit opt\" href=\"javascript:void(0);\"><span>编辑</span></a>");
+	        $(el).append($editor);
+	        $(el).find(".edit").unbind("click").click(function(){
+	            window.location = _path + "/sys/admin/" + data.id+"/toSysAdminEdit";
+	        });
         <% 
         }
         %>
+   
     }
     
-    $(function(){
-        $("#sys_admin").addClass("active");
-        $("#sys").addClass("open");
-        $("#sys").addClass("active");
-    });
     </script>
     <style type="text/css">
-        .radioList-horizontal{
-            text-align:right;
-        }
-        
-        .radioList-horizontal-first{
-            margin-left:10px;
-        }
-        
-        .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset{ 
-            text-align: center 
-         }
-         
-        .inlineWrap{
-	        margin-top:10px;
-	        margin-bottom:10px;
-        }
-        .table-operation-column a {
-          padding-right: 10px;
-        }
+        .opt{
+	          display: inline-block;
+	          width: 50px;
+	          padding: 5px;
+	      }
     </style>
 </head>
   
@@ -91,7 +65,7 @@
                             <a href="${path}/">首页</a>
                         </li>
                         <li class="active">系统配置</li>
-                        <li class="active">系统管理员</li>
+                        <li class="active">账号管理</li>
                     </ul><!-- .breadcrumb -->
                 </div>
             
@@ -99,14 +73,14 @@
                     <div style="height: 40px;"></div>
                     <div class="panel panel-default">
 		                 <div class="panel-heading panel-title">
-	                        <div class="row">
-	                           <div class="col-md-6 text-left"><h5>新增用户</h5></div>
-	                           <shiro:hasPermission name="sys.administrator:create"> 
-	                           <div class="col-md-6 text-right action-bar">
-	                             <a type="button" class="btn btn-primary" href="${path}/sys/admin/toSysAdminAdd" >新增用户</a>
-	                           </div>
-	                           </shiro:hasPermission>
-	                        </div>
+		                      <div class="row">
+                                 <div class="col-xs-6 text-left"> 账号管理</div>
+                                 <div class="col-xs-6 text-right action-bar">
+                                    <shiro:hasPermission name="modify:account_management">                 
+		                              <a type="button" class="btn btn-primary" href="${path}/sys/admin/toSysAdminAdd" >新增账号</a>
+				                    </shiro:hasPermission> 
+                                 </div>
+                             </div>
 		                 </div>
 		                 <div class="panel-body">
 		                     <div class="row">
@@ -132,7 +106,7 @@
 		                                    </div> 
 		                                    
 		                                    
-		                                    <div class="text-center">
+		                                    <div class="col-md-4 text-center">
 		                                        <input type="button" id="searchButton" class="btn btn-large btn-primary" value="查询"/>
 		                                        <input type="button" id="resetButton" class="btn btn-primary" value="重置" />
 		                                   </div>
@@ -142,7 +116,6 @@
 		                     </div>
 		                 </div>
 		            </div>
-		            
 		            
 		            <div class="row" style="margin-top:5px;">
 		                <div class="col-xs-12">

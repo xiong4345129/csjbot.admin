@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="${path }/resources/iCheck/skins/all.css" />
     <script src="${path }/resources/iCheck/icheck.min.js"></script>
     <script src="${path }/scripts/sys/assign-user.js"></script>
-    <script src="${path }/scripts/plugins/datatable/jquery.bravoui.datatable.js"></script>
+    <script src="${path }/scripts/plugins/datatable/jquery.csjbotui.datatable.js"></script>
     <style>
       .panel-body .row {
         margin: 0px;

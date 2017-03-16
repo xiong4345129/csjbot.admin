@@ -9,7 +9,7 @@ import com.csjbot.admin.util.StringUtil;
  * 
  * sys_role_permission_ref表
  * 
- * @author xiaoming
+ * @author cjay
  * 
  */
 public class RolePermissionRef implements Serializable {
