@@ -7,6 +7,8 @@ public class Constants {
 	/** 当前验证码 */
 	public final static String CURRENT_USER_VALIDATE_CODE_KEY = "CURRENT_USER_VALIDATE_CODE_KEY";
 	
+	public final static String ADMIN_ACCOUNT = "admin";
+	
 	public final static Integer LAST_DAYS_30 = 30;
 		
 	public class Log{

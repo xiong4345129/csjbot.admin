@@ -1,6 +1,6 @@
 /**
  * 
- * @author xiaoming
+ * @author cjay
  */
 
 (function($) {
@@ -14,7 +14,7 @@
 })(jQuery);
 
 
-var bravoui = bravoui || {};
+var csjbotui = csjbotui || {};
 
 (function(BUI) {
 
@@ -36,12 +36,12 @@ var bravoui = bravoui || {};
 		return false;
 	};
 
-}(bravoui));
+}(csjbotui));
 
 /**
  * 数据处理
  */
-bravoui.data = bravoui.data || {};
+csjbotui.data = csjbotui.data || {};
 
 (function($, BUI) {
 
@@ -71,4 +71,4 @@ bravoui.data = bravoui.data || {};
 		BUI.data.request(url, 'POST', param, callback, settings);
 	};
 	
-}(jQuery, bravoui));
+}(jQuery, csjbotui));

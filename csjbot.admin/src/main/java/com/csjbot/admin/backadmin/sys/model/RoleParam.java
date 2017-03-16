@@ -5,7 +5,7 @@ import com.csjbot.admin.web.entity.PaginationParam;
 /**
  * 角色查询参数
  * 
- * @author xiaoming
+ * @author cjay
  * 
  */
 public class RoleParam extends PaginationParam {

@@ -78,7 +78,7 @@ function save(){
 		    	}
 			},  
 		    error : function(data) {  
-		    	bravoui.ui.msg.alert("对不起数据维护失败")  ;
+		    	csjbotui.ui.msg.alert("对不起数据维护失败")  ;
 	        }  
 		});
  }

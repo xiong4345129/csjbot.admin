@@ -8,12 +8,24 @@
 		<result property="code" column="code" />
 		<result property="name" column="name" />
 		<result property="memo" column="memo" />
+		<result property="type" column="type" />
+		<result property="creator_fk" column="creator_fk" />
+		<result property="updater_fk" column="updater_fk" />
 		<result property="dateOfCreate" column="date_create" />
 		<result property="dateOfUpdate" column="date_update" />
 		<result property="isValid" column="valid" />
 	</resultMap>
-	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="permissionResultMap"></resultMap>
-	<resultMap id="findResultMap"  type="java.util.HashMap" extends="permissionResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="permissionResultMap">
+	   <result property="status" column="status" />
+	   <result property="typeName" column="typeName" />
+	   <result property="creator" column="creator" />
+	</resultMap>
+	<resultMap id="findResultMap"  type="java.util.HashMap" extends="permissionResultMap">
+	   <result property="status" column="status" />
+       <result property="typeName" column="typeName" />
+       <result property="creator" column="creator" />
+       <result property="updater" column="updater" />
+	</resultMap>
 
 	<insert id="insert" parameterType="com.csjbot.admin.data.sys.model.Permission">
 	   INSERT INTO sys_permission (
@@ -21,6 +33,9 @@
 	     code,
 	     name,
 	     memo,
+	     type,
+	     creator_fk,
+	     updater_fk,
 	     date_create,
 	     date_update,
 	     valid
@@ -29,8 +44,11 @@
 	     #{code},
 	     #{name},
 	     #{memo},
-	     #{dateOfCreate},
-	     #{dateOfUpdate},
+	     #{type},
+	     #{creator_fk},
+	     #{updater_fk},
+	     now(),
+	     now(),
 	     #{isValid}
 	   )
 	</insert>
@@ -40,8 +58,9 @@
 		SET code=#{code},
     		name=#{name},
     		memo=#{memo},
-    		date_create=#{dateOfCreate},
-    		date_update=#{dateOfUpdate},
+    		updater_fk=#{updater_fk},
+    		date_update=now(),
+    		type=#{type},
     		valid=#{isValid}
 		WHERE id=#{id} 
 	</update>
@@ -65,10 +84,15 @@
 	    code,
 	    name,
 	    memo,
+	    type,
+	    (CASE WHEN type = 1 THEN '菜单' ELSE '其它' END) AS typeName,
 	    date_create,
 	    date_update,
-	    is_valid
-	   FROM sys_permission
+	    valid,
+	    (CASE WHEN valid  = 1 THEN '启用' ELSE '停用' END) AS status,
+	    (select realName from ums_user u where u.id = p.creator_fk  ) as creator,
+	    (select realName from ums_user u where u.id = p.updater_fk  ) as updater
+	   FROM sys_permission p
 	   WHERE 
 	    id=#{id} 
 	</select>
@@ -79,6 +103,7 @@
 	     code,
 	     name,
 	     memo,
+	     type,
 	     date_create,
 	     date_update,
 	     valid
@@ -102,7 +127,7 @@
 	     <if test="dateOfUpdate != null">
 	        AND date_update=#{dateOfUpdate}
 	     </if>
-	     <if test="isValid != null">
+	     <if test="isValid == 1 or isValid == 0">
 	        AND is_valid=#{isValid}
 	     </if>
 	   </where>
@@ -114,33 +139,29 @@
 	     code,
 	     name,
 	     memo,
+	     type,
+	     (CASE WHEN type = 1 THEN '菜单' ELSE '其它' END) AS typeName,
 	     date_create,
 	     date_update,
-	     valid
-	   FROM sys_permission
+	     valid,
+	     (CASE WHEN valid  = 1 THEN '启用' ELSE '停用' END) AS status,
+	     (select realName from ums_user u where u.id = p.creator_fk  ) as creator 
+	   FROM sys_permission p
 	   <where>
-	     <if test="id != null">
-	        id=#{id}
-	     </if>
+	     <if test="name != null">
+            name LIKE CONCAT(CONCAT('%',#{name}),'%')
+         </if>
 	     <if test="code != null">
 	        AND code=#{code}
 	     </if>
-	     <if test="name != null">
-	        AND name=#{name}
-	     </if>
-	     <if test="memo != null">
-	        AND memo=#{memo}
-	     </if>
-	     <if test="dateOfCreate != null">
-	        AND date_create=#{dateOfCreate}
-	     </if>
-	     <if test="dateOfUpdate != null">
-	        AND date_update=#{dateOfUpdate}
-	     </if>
-	     <if test="isValid != null">
+	     <if test="type == 0 or type == 1">
+            AND type=#{type}
+         </if>
+	     <if test="isValid == 1 or isValid == 0">
 	        AND valid=#{isValid}
 	     </if>
 	   </where>
+	   order by code
 	</select>
 	
 </mapper> 

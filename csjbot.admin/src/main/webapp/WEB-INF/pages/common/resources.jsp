@@ -39,8 +39,8 @@
   <script src="${path}/resources/jquery-validation/1.11.1/messages_bs_zh.js"></script>
   
   <!-- 提示框控件 -->
-  <script src="${path }/scripts/plugins/jquery.bravoui.core.js" ></script>
-  <script src="${path}/scripts/plugins/jquery.bravoui.ui.js"></script>
+  <script src="${path }/scripts/plugins/jquery.csjbotui.core.js" ></script>
+  <script src="${path}/scripts/plugins/jquery.csjbotui.ui.js"></script>
   
   <!-- ace模板 -->
   <link rel="stylesheet" href="${path}/resources/ace/css/ace.min.css" />

@@ -16,7 +16,7 @@ import com.csjbot.admin.page.Page;
 /**
  * 数据访问接口
  * 
- * @author xiaoming
+ * @author cjay
  * 
  */
 @Repository

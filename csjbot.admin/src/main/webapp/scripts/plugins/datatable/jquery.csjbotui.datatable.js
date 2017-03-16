@@ -1,7 +1,7 @@
 /**
  * Paginate, sort, render html tables
  * 
- * @author xiaoming
+ * @author cjay
  * @version 0.0.1-alpha1
  * 
  */
@@ -203,12 +203,12 @@
 				},
 				error : function(xhr, msg) {
 					if ("timeout" == msg || "parsererror" == msg) {
-						bravoui.ui.msg.alert("对不起，session过期，请重新登录!");
+						csjbotui.ui.msg.alert("对不起，session过期，请重新登录!");
 						$(document).on("click", "#closeModal", function(){
 							window.location.reload();
 						});
 					} else {
-						bravoui.ui.msg.alert("对不起，表格数据加载失败!");
+						csjbotui.ui.msg.alert("对不起，表格数据加载失败!");
 						// --------------------------------------------------------------------------------------------------------
 						$(target).data("loaded", false);
 						// $(target).mask('close');

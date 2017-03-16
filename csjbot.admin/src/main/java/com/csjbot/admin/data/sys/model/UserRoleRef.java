@@ -10,7 +10,7 @@ import com.csjbot.admin.util.StringUtil;
  * 
  * 用户角色关系对象
  * 
- * @author xiaoming
+ * @author cjay
  * 
  */
 public class UserRoleRef implements Serializable {
