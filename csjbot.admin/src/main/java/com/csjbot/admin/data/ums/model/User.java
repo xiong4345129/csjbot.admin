@@ -33,6 +33,7 @@ public class User extends AtomModel implements Serializable {
 	private int sex;// 性别 0：男 1：女
 	private String idCard; // 身份证号码
 	private int isSuperAdmin;// 0 否 1：是
+	private int passwordChanged = 0; //0 否 1 是
 	private Date lastLoginTime;// 最后登录时间
 	private int status;// 0 否 1：是
 	private Date dateEffect;// 生效时间
@@ -91,6 +92,12 @@ public class User extends AtomModel implements Serializable {
 	}
 	public void setIsSuperAdmin(int isSuperAdmin) {
 		this.isSuperAdmin = isSuperAdmin;
+	}
+	public int getPasswordChanged() {
+		return passwordChanged;
+	}
+	public void setPasswordChanged(int passwordChanged) {
+		this.passwordChanged = passwordChanged;
 	}
 	public Date getLastLoginTime() {
 		return lastLoginTime;

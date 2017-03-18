@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -160,6 +161,20 @@ public class SysAdminController {
 		mav.addObject("user",user);
 		mav.addObject("roles",roles);
 		return mav;
+	}
+	
+	/**
+	 * 修改个人密码
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/toChangePersonalPassword", method = RequestMethod.GET)
+	public String toChangePersonalPassword(HttpServletRequest request, Model model){
+	    
+	    User loginUser = (User) request.getSession().getAttribute(Constants.CURRENT_USER);
+	    model.addAttribute("user", loginUser);
+	    return "index/personal_password";
 	}
 	
 	/**

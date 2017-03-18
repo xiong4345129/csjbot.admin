@@ -95,6 +95,7 @@ public class UserServiceImpl implements UserService {
         if (user != null && StringUtil.notEmpty(password)) {
             user.setUpdater_fk(updater_fk);
             user.setPassword(password);
+            user.setPasswordChanged(1);
             PasswordHelper passwordHelper = new PasswordHelper();
             passwordHelper.encryptPassword(user);
             return userDao.update(user) > 0;

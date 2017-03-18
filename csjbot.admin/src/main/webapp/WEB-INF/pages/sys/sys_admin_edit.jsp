@@ -175,7 +175,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
+<%-- 									<div class="row">
 									   <div class="col-md-12">
 									       <div class="col-md-6">
 		                                     <div class="form-group">
@@ -198,10 +198,10 @@
 		                                     </div>
 			                               </div> 
 									   </div>
-									</div>
+									</div> --%>
 									
 									<!-- cgy -->
-									<div class="appointCont row">
+									<%-- <div class="appointCont row">
 										<div class="col-md-12">
 											<div id="appoint" class="col-md-6">
 												
@@ -244,7 +244,7 @@
 											
 											</div>
 										</div>
-									</div>
+									</div> --%>
 									<!-- cgy end -->
 									
 									<div class="text-center">
