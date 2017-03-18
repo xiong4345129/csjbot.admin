@@ -19,6 +19,9 @@
                     </a>
 
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li id="changePersonalPassword">
+                            <a href="${path}/sys/admin/toChangePersonalPassword"><i class="icon-edit"></i>修改密码</a>
+                        </li>                    
                         <li>
                             <a href="${path}/logout"><i class="icon-off"></i>退出</a>
                         </li>

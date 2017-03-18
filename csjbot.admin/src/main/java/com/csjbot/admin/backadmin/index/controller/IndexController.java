@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.csjbot.admin.constant.Constants;
+import com.csjbot.admin.data.ums.model.User;
 import com.csjbot.admin.exception.DisableAccountException;
 
 @Controller
@@ -49,7 +51,12 @@ public class IndexController {
      * @return
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String afterLoginSuccess(HttpServletRequest request, HttpServletResponse response) {
+    public String afterLoginSuccess(HttpServletRequest request, HttpServletResponse response, Model model) {
+    	User loginUser = (User) request.getSession().getAttribute(Constants.CURRENT_USER);
+    	if (loginUser != null && loginUser.getPasswordChanged()==0) {
+    		model.addAttribute("user", loginUser);
+    		return "index/main_password";
+        }
         return "main";
     }
 

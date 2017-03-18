@@ -196,7 +196,7 @@
 	                                                </div>
 	                                            </div>
 	                                        </div>
-	                                        <div class="col-md-6">
+<!-- 	                                        <div class="col-md-6">
 	                                             <div class="form-group">
 	                                                 <div class="input-group">租户查看权限
 	                                                  <label class="radio-inline radioList-horizontal-first">
@@ -205,19 +205,19 @@
 	                                                  <label class="radio-inline"> 
 	                                                     <input type="radio" name="read_group" id="read_group" value="1" onclick="appointTenant1();">团队
 	                                                  </label>
-	                                                  <!-- cgy -->
+	                                                  cgy
 			                                          <label class="radio-inline"> 
 			                                              <input class="appointTenantClass" type="radio" name="read_group" id="read_group1" value="2" onclick="appointTenant2();">指定租户
 			                                          </label>
-		                                          	  <!-- cgy end -->
+		                                          	  cgy end
 	                                                 </div>
 	                                             </div>
-                                           </div> 
+                                           </div>  -->
 	                                    </div>
 	                                </div>
 	
 									<!-- cgy -->
-									<div class="appointCont row">
+									<%-- <div class="appointCont row">
 										<div class="col-md-12">
 											<div id="appoint" class="col-md-6">
 												
@@ -260,7 +260,7 @@
 											
 											</div>
 										</div>
-									</div>
+									</div> --%>
 									<!-- cgy end -->
 									
 	                                <div class="text-center">
