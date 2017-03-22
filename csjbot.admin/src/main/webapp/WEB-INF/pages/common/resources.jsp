@@ -58,10 +58,6 @@
   <script src="${path}/resources/ace/js/ace-elements.min.js"></script>
   <script src="${path}/resources/ace/js/ace.min.js"></script>
   
-  <!-- eCharts JS -->
-  <script src="${path }/resources/echarts-2.2.1/echarts.js" ></script>
-  <script src="${path }/scripts/common/common.js" ></script>
-  
   <!-- select  控件 -->
   <link rel="stylesheet" type="text/css" href="${path }/css/report/select.css" />
   <script src="${path}/resources/plugins/select/select.js"></script>

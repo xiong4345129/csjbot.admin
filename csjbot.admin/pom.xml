@@ -39,7 +39,7 @@
           <minimumPriority>3</minimumPriority>
           <linkXref>false</linkXref>
           <minimumTokens>100</minimumTokens>
-          <targetJdk>1.7</targetJdk>
+          <targetJdk>1.8</targetJdk>
           <aggregate>true</aggregate>
           <detail>true</detail>
           <includeXmlInSite>true</includeXmlInSite>
