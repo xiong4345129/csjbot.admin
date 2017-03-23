@@ -28,6 +28,8 @@ public interface DaoSupport {
 
     public <E, K, V> Page<E> page(String pageStatement, Map<K, V> parameter, int current, int pagesize);
     
+    public <E, K, V> Page<E> pageAndSort(String pageStatement, Map<K, V> parameter, int current, int pagesize, String sortString);
+    
     public Connection getConnection();
 
     public Configuration getConfiguration();

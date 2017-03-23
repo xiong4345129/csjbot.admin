@@ -1,4 +1,4 @@
-/*package com.csjbot.admin.util;
+package com.csjbot.admin.util;
 
 import java.util.Properties;
 
@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-*//**
- * Properties
+/**
+ * Properties宸ュ叿绫?
  * 
- * @author lzl
- *//*
+ * @version 2012-9-11 涓嬪崍01:10:22
+ */
 @Component
 public class PropertiesUtils {
 	@Autowired
@@ -20,9 +20,9 @@ public class PropertiesUtils {
 	private Properties properties;
 	private static PropertiesUtils piu;
 
-	*//**
-	 * 
-	 *//*
+	/**
+	 * 鍒濆鍖栧伐鍏风被榛樿灞炴?
+	 */
 	@PostConstruct
 	public void init() {
 		piu = this;
@@ -34,4 +34,3 @@ public class PropertiesUtils {
 	}
 
 }
-*/
