@@ -13,6 +13,7 @@ package com.csjbot.admin.backadmin.pms.service;
 
 import java.util.Map;
 
+import com.csjbot.admin.data.pms.model.PmsProduct;
 import com.csjbot.admin.page.Page;
 
 /** 
@@ -31,5 +32,11 @@ public interface PmsService {
 	     */
 	Page<Map<String, Object>> pageAndSort(Map<String, Object> params, int i,
 			int length, String sortString);
+	
+	boolean insert(PmsProduct product);
+	
+	PmsProduct selectByPrimaryKey(String id);
+
+	boolean update(PmsProduct pmsProduct);
 
 }

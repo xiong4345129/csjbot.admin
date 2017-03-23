@@ -66,7 +66,7 @@ $(function() {
 	               render: operation,
 	               orderable: false
 	           }],
-		        order: [[ 3, 'asc' ]],
+		        order: [[ 3, 'desc' ]],
 		        remoteSort : true,
 				pagination : true,
 				paginationParam : {
@@ -85,10 +85,10 @@ function operation( data, type, row ) {
                  + "<a class='opt' id='edit_"+row.id+"' href=\"javascript:void(0);\" ><span>编辑</span></a>&nbsp;&nbsp;"
              
         $(document).off("click", "#detail_" + row.id).on("click", "#detail_" + row.id, function(){
-        	window.location = _path + "/con/" + row.id + "/toConfigDetail";
+        	window.location = _path + "/pms/" + row.id + "/toProductDetail";
          });
 	    $(document).off("click", "#edit_" + row.id).on("click", "#edit_" + row.id, function(){
-	    	window.location = _path + "/con/" + row.id + "/toConfigEdit";
+	    	window.location = _path + "/pms/" + row.id + "/toProductUpdate";
 	     });    
 	    
     return editor;

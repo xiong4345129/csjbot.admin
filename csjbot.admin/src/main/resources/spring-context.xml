@@ -48,7 +48,9 @@
         </array>
     </property>
   </bean>
-  
+
+  <bean id="SpringApplicationContext" class="com.csjbot.admin.util.ApplicationContextHelper"></bean>
+
   <bean id="paginationInterceptor" class="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
 	  <property name="properties">  
          <props>

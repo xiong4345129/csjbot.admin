@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.csjbot.admin.backadmin.pms.service.PmsService;
 import com.csjbot.admin.data.pms.dao.PmsProductDao;
+import com.csjbot.admin.data.pms.model.PmsProduct;
 import com.csjbot.admin.page.Page;
 
 /** 
@@ -39,6 +40,21 @@ public class PmsServiceImpl implements PmsService{
 	@Override
 	public Page<Map<String, Object>> pageAndSort(Map<String, Object> params,int current, int pagesize, String sortString) {
 		return pmsProductDao.pageAndSort(params, current, pagesize, sortString);
+	}
+	  
+	@Override
+	public boolean insert(PmsProduct product) {
+		return pmsProductDao.insert(product)>0;
+	}
+
+	@Override
+	public PmsProduct selectByPrimaryKey(String id) {
+		return pmsProductDao.selectByPrimaryKey(id);
+	}
+	
+	@Override
+	public boolean update(PmsProduct product) {
+		return pmsProductDao.updateByPrimaryKeySelective(product)>0;
 	}
 	
 

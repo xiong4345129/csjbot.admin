@@ -59,5 +59,5 @@
   <script src="${path}/resources/ace/js/ace.min.js"></script>
   
   <!-- select  控件 -->
-  <link rel="stylesheet" type="text/css" href="${path }/css/report/select.css" />
-  <script src="${path}/resources/plugins/select/select.js"></script>
+ <%--  <link rel="stylesheet" type="text/css" href="${path }/css/report/select.css" />
+  <script src="${path}/resources/plugins/select/select.js"></script> --%>

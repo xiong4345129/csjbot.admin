@@ -1,5 +1,8 @@
 package com.csjbot.admin.data.sys.dao.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +23,8 @@ import com.csjbot.admin.page.Page;
 @Repository
 public class SysAttachmentDaoImpl implements SysAttachmentDao{
 
+	@Autowired  private DaoSupport dao;
+	
 	@Override
 	public int deleteByPrimaryKey(Long id) {
 		// TODO Auto-generated method stub
@@ -27,9 +32,8 @@ public class SysAttachmentDaoImpl implements SysAttachmentDao{
 	}
 
 	@Override
-	public int insert(SysAttachment record) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean insert(SysAttachment record) {
+		return dao.insert(PREFIX + ".insert", record)>0;
 	}
 
 	@Override
@@ -54,6 +58,23 @@ public class SysAttachmentDaoImpl implements SysAttachmentDao{
 	public int updateByPrimaryKey(SysAttachment record) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public SysAttachment getAttachByTransInfo(String transaction_id,String transaction_type) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("transaction_id", transaction_id);
+		map.put("transaction_type", transaction_type);
+		return dao.get(PREFIX + ".getAttachByTransInfo", map);
+	}
+
+	    
+	@Override
+	public void deleteByTransInfo(String transation_id, String transation_type) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("transaction_id", transation_id);
+		map.put("transaction_type", transation_type);
+		dao.delete(PREFIX + ".deleteByTransInfo", map);
 	}
 	
 

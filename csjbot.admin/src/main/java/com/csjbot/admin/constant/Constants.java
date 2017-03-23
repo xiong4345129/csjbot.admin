@@ -1,5 +1,7 @@
 package com.csjbot.admin.constant;
 
+import com.csjbot.admin.util.PropertiesUtils;
+
 public class Constants {
 	
 	/** 当前用户 */
@@ -8,6 +10,9 @@ public class Constants {
 	public final static String CURRENT_USER_VALIDATE_CODE_KEY = "CURRENT_USER_VALIDATE_CODE_KEY";
 	
 	public final static String ADMIN_ACCOUNT = "admin";
+	
+	/** 文件上传路径*/
+	public final static String UPLOAD_PATH = PropertiesUtils.getValue("upload.path");
 	
 	public final static Integer LAST_DAYS_30 = 30;
 		
@@ -30,32 +35,26 @@ public class Constants {
 	
 	
 	public class DataDictionary{
-		/**支付方法**/
-		public final static String ZFFF = "ZFFF"; 
-		/**服务规模**/
-		public final static String FWGM = "FWGM";  
-		/**过滤模块**/
-		public final static String GLMK = "GLMK";  
 		/**产品分类**/
 		public final static String CPFL = "CPFL"; 
-		/**报表时间**/
-		public final static String BBSJ = "BBSJ"; 
-		/**Pad使用时长分段,单位秒**/
-		public final static String SYSC = "SYSC"; 
-		/**Pad使用频次，单位次**/
-		public final static String SYPC = "SYPC"; 
-		/**接口频道**/
-		public final static String JKPD = "JKPD"; 
-		/** 产品利率分段  **/
-		public final static String LLFD = "LLFD";
-		/** Pad访问页数 **/
-        public final static String FWYS = "FWYS";
-        /** Pad使用间隔  **/
-        public final static String SYJG = "SYJG";
+		/**支付方法**/
+		public final static String ZFFF = "ZFFF"; 
 	}
 	
 	public class Status{
 		public final static int RUN = 1;
 		public final static int DOWN = 0;
 	}
+	
+	public class Attachment{
+		
+		public class Type{
+			public final static String PRODUCT_BASIC_INFO = "PRODUCT_BASIC_INFO";
+		}
+		public class Path {
+			public final static String PRODUCT_PIC_PATH = "/pms/";
+		}
+	}
+	
+	
 }

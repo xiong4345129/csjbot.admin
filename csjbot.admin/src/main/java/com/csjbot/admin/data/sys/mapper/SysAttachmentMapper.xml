@@ -34,6 +34,16 @@
     from sys_attachment
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="getAttachByTransInfo" resultMap="BaseResultMap" parameterType="map">
+      select 
+	    <include refid="Base_Column_List" />
+	    from sys_attachment
+	    where transaction_id = #{transaction_id} and transaction_type = #{transaction_type}
+  </select>
+  <delete id="deleteByTransInfo" parameterType="map" >
+    delete from sys_attachment
+     where transaction_id = #{transaction_id} and transaction_type = #{transaction_type}
+  </delete>  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from sys_attachment
     where id = #{id,jdbcType=BIGINT}
@@ -51,8 +61,8 @@
       #{alias_name,jdbcType=VARCHAR}, #{server_host,jdbcType=VARCHAR}, #{directory,jdbcType=VARCHAR}, 
       #{location,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{size,jdbcType=INTEGER}, 
       #{suffix,jdbcType=VARCHAR}, #{owner_fk,jdbcType=CHAR}, #{creator_fk,jdbcType=CHAR}, 
-      #{updater_fk,jdbcType=CHAR}, #{date_create,jdbcType=TIMESTAMP}, #{date_update,jdbcType=TIMESTAMP}, 
-      #{is_valid,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER})
+      #{updater_fk,jdbcType=CHAR}, now(), now(), 
+      1, #{sort,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.csjbot.admin.data.sys.model.SysAttachment" >
     insert into sys_attachment

@@ -3,13 +3,9 @@
         {
         	var div = document.getElementById('preview'+flag);
           switch(flag){
-          	case 0:
-          		var MAXWIDTH  = 152; 
-                var MAXHEIGHT = 204;
-          	    break;
           	case 1:
-          		var MAXWIDTH  = 35; 
-                var MAXHEIGHT = 32;
+          		var MAXWIDTH  = 200; 
+                var MAXHEIGHT = 150;
           		break;
           	case 2:
           		var MAXWIDTH  = 144; 

@@ -56,7 +56,10 @@ jQuery.validator.addMethod("spaceNotAllow", function(value, element) {
     return this.optional(element) || (englishNum.test(value));
 }, "输入的内容不能有空格");
 
-
+jQuery.validator.addMethod("isFloatNum2", function(value, element) {   
+    var englishNum =  /^[1-9]{1}[0-9]{0,10}(\.[0-9]{0,2})?$/;
+    return this.optional(element) || (englishNum.test(value));
+}, "请输入数字, 支持2位小数, 整数位不能超过11位");
 
 jQuery.validator.addMethod("isFloatNum", function(value, element) {   
     var englishNum =  /^[1-9]{1}[0-9]{0,10}(\.[0-9]{0,1})?$/;

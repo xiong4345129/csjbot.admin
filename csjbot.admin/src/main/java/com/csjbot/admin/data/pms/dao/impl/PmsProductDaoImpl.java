@@ -1,5 +1,6 @@
 package com.csjbot.admin.data.pms.dao.impl;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,8 @@ public class PmsProductDaoImpl implements PmsProductDao {
 	}
 
 	@Override
-	public int insert(PmsProduct record) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insert(PmsProduct product) {
+		return dao.insert(PREFIX +".insert",product);
 	}
 
 	@Override
@@ -35,14 +35,14 @@ public class PmsProductDaoImpl implements PmsProductDao {
 
 	@Override
 	public PmsProduct selectByPrimaryKey(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", id);
+		return dao.get(PREFIX +".selectByPrimaryKey", map);
 	}
 
 	@Override
 	public int updateByPrimaryKeySelective(PmsProduct record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.update(PREFIX +".updateByPrimaryKeySelective", record) ;
 	}
 
 	@Override

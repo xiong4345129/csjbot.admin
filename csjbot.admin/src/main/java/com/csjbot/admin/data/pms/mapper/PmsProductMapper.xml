@@ -23,7 +23,7 @@
           and ( upper(`name`) LIKE CONCAT('%', #{name},'%'))
        </if>                 
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
     select 
     <include refid="Base_Column_List" />
     from pms_product
@@ -39,8 +39,8 @@
       creator_fk, date_update, date_create
       )
     values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{memo,jdbcType=VARCHAR}, #{valid,jdbcType=TINYINT}, #{updater_fk,jdbcType=CHAR}, 
-      #{creator_fk,jdbcType=CHAR}, #{date_update,jdbcType=TIMESTAMP}, #{date_create,jdbcType=TIMESTAMP}
+      #{memo,jdbcType=VARCHAR}, 1, #{updater_fk,jdbcType=CHAR}, 
+      #{creator_fk,jdbcType=CHAR},now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.csjbot.admin.data.pms.model.PmsProduct" >
@@ -126,7 +126,7 @@
         creator_fk = #{creator_fk,jdbcType=CHAR},
       </if>
       <if test="date_update != null" >
-        date_update = #{date_update,jdbcType=TIMESTAMP},
+        date_update = now(),
       </if>
       <if test="date_create != null" >
         date_create = #{date_create,jdbcType=TIMESTAMP},
