@@ -56,6 +56,11 @@ public class PmsServiceImpl implements PmsService{
 	public boolean update(PmsProduct product) {
 		return pmsProductDao.updateByPrimaryKeySelective(product)>0;
 	}
+	    
+	@Override
+	public boolean deleteByPrimaryKey(String id) {
+		return pmsProductDao.deleteByPrimaryKey(id)>0;
+	}
 	
 
 

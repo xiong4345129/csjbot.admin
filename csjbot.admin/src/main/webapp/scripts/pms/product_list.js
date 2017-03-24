@@ -83,6 +83,7 @@ $(function() {
 function operation( data, type, row ) {
     var editor = "<a class='opt' id='detail_"+row.id+"' href=\"javascript:void(0);\" ><span>详情</span></a>&nbsp;&nbsp;"
                  + "<a class='opt' id='edit_"+row.id+"' href=\"javascript:void(0);\" ><span>编辑</span></a>&nbsp;&nbsp;"
+                 + "<a class='opt' id='delete_"+row.id+"' href=\"javascript:void(0);\" ><span>删除</span></a>&nbsp;&nbsp;"
              
         $(document).off("click", "#detail_" + row.id).on("click", "#detail_" + row.id, function(){
         	window.location = _path + "/pms/" + row.id + "/toProductDetail";
@@ -90,6 +91,30 @@ function operation( data, type, row ) {
 	    $(document).off("click", "#edit_" + row.id).on("click", "#edit_" + row.id, function(){
 	    	window.location = _path + "/pms/" + row.id + "/toProductUpdate";
 	     });    
+	    $(document).off("click", "#delete_" + row.id).on("click", "#delete_" + row.id, function(){
+	       	 csjbotui.ui.msg.confirm({
+	 		        title : "警告",
+					msg : "您确定要删除该产品【"+row.name+"】?",
+					ok:function(){
+						 $.ajax({
+			        		type : "POST",
+			  	            url : _path + "/pms/" + row.id + "/productDelete",
+			  	            dataType : "json",
+			  	            success : function(data){ 
+			  	            	if (data.msg == "S") {
+	  	            				window.location.href = _path + "/pms/list";
+			  	            		
+			  	            	} else {
+			  	            		csjbotui.ui.msg.alert( data.msg );
+			  	            	}
+			  	            },
+				        	 error : function(xhr, msg, error) {
+				             	csjbotui.ui.msg.alert("Internal Server Error!");
+				             } 
+			        	 });
+					}
+				});	    	
+	     });   
 	    
     return editor;
 }

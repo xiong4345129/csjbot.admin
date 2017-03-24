@@ -38,5 +38,7 @@ public interface PmsService {
 	PmsProduct selectByPrimaryKey(String id);
 
 	boolean update(PmsProduct pmsProduct);
+	
+	boolean deleteByPrimaryKey(String id);
 
 }
