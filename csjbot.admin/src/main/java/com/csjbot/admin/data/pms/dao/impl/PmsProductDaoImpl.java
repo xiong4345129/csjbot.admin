@@ -18,8 +18,9 @@ public class PmsProductDaoImpl implements PmsProductDao {
 	
 	@Override
 	public int deleteByPrimaryKey(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", id);
+		return dao.delete(PREFIX +".deleteByPrimaryKey", map);
 	}
 
 	@Override

@@ -30,6 +30,7 @@ public class SysAttachServiceImpl implements SysAttachService{
 	@Override
 	public void deleteByTransInfo(String transation_id, String transation_type) {
 		SysAttachment sysAttachment = this.getAttachByTransInfo(transation_id, transation_type);
+		if(null==sysAttachment)return;
 		FileUtil fileUtil = new FileUtil();
 		fileUtil.deleteFile(sysAttachment.getLocation());
 		sysAttachDao.deleteByTransInfo(transation_id,transation_type);

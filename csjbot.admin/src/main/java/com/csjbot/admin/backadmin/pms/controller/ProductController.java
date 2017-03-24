@@ -190,6 +190,29 @@ public class ProductController {
 	    result.put("msg", msg);
 	    return new ResponseEntity<String>(result.toString(), headers, HttpStatus.OK);
 	}
+	
+	/**
+     * @discription 删除产品
+     * @author CJay       
+     * @created 2017年3月24日 上午8:52:41
+	 */
+	@RequestMapping(value = "{id}/productDelete")
+	public ResponseEntity<String> ProductDelete(@PathVariable String id,HttpServletResponse response){
+		JSONObject result = new JSONObject();
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    response.setCharacterEncoding("UTF-8");
+	    String msg = ResultEntity.KW_STATUS_SUCCESS;
+	    PmsProduct pmsProduct = pmsService.selectByPrimaryKey(id);
+	    try {
+	    	attachService.deleteByTransInfo(pmsProduct.getId(),Constants.Attachment.Type.PRODUCT_BASIC_INFO);
+		    pmsService.deleteByPrimaryKey(id);
+		} catch (Exception e) {
+			msg=e.getMessage();
+		}
+	    result.put("msg", msg);
+	    return new ResponseEntity<String>(result.toString(), headers, HttpStatus.OK);
+	}
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ResponseEntity<ResultEntity> page(HttpServletRequest request, HttpServletResponse response) {
