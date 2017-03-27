@@ -1,6 +1,6 @@
 var versionTableOps = function () {
     var httpclient = new httpClient();
-    var baseUrl = "/tms";
+    var baseUrl = _path +"/tms";
     var urls = {
         delete: baseUrl + "/delete"
     };

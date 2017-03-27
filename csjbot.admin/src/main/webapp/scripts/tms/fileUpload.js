@@ -1,6 +1,6 @@
 var fileUploadOps = function () {
     var httpclient = httpClient();
-    var baseUrl = "/tms";
+    var baseUrl = _path +"/tms";
     var urls = {
         listDirs: baseUrl + "/listdir",
         uploadFile: baseUrl + "/upload"

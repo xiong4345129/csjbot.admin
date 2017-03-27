@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-xs-6 text-left">升级包管理</div>
                             <div class="col-xs-6 text-right action-bar">
-                                <shiro:hasPermission name="modify:version_control">
+                               <%--  <shiro:hasPermission name="modify:version_control"> --%>
                                     <a type="button" class="btn btn-primary" id="file-upload-modal-btn"
                                         <%--href="${path}/tms/fileUpload">--%>
                                        data-toggle="modal" data-target="#file-upload-modal">
@@ -150,7 +150,7 @@
                                         </div>
                                     </div>
 
-                                </shiro:hasPermission>
+                               <%--  </shiro:hasPermission> --%>
                             </div>
                         </div>
                     </div>

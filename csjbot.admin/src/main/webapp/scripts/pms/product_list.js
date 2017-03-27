@@ -1,4 +1,5 @@
 var table = "";
+var initable = "";
 $(function() {
 	
 	// ----------------条件搜索-----------------------------------------------------------
@@ -77,7 +78,9 @@ $(function() {
 		 };
 		 return options;
 	}
+	initable = initOptions();
 	table = $("#tp").DataTable(initOptions());
+	
 });
 
 function operation( data, type, row ) {
@@ -103,7 +106,6 @@ function operation( data, type, row ) {
 			  	            success : function(data){ 
 			  	            	if (data.msg == "S") {
 	  	            				window.location.href = _path + "/pms/list";
-			  	            		
 			  	            	} else {
 			  	            		csjbotui.ui.msg.alert( data.msg );
 			  	            	}
