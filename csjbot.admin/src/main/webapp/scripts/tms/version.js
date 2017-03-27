@@ -25,6 +25,7 @@ var versionTableOps = function () {
                     console.log(composeDeleteUrl(fileId));
                     httpclient.delete(composeDeleteUrl(fileId), (status, body)=> {
                         console.log("delete file " + fileId + " " + status + " " + body);
+                        location.reload();
                     });
                 });
             }
@@ -50,5 +51,6 @@ var versionTableOps = function () {
 }();
 
 (function () {
+    fileUploadOps.init();
     versionTableOps.init();
 })();

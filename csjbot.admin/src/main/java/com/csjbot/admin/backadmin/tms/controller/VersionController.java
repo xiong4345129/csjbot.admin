@@ -108,11 +108,11 @@ public class VersionController {
 
     private boolean createDBInfo(String filePath, String fileName) {
         PkgFile file = new PkgFile(fileName, filePath, new Date());
-        return (fileDBService.insert(file) == 1) ? true : false;
+        return (fileDBService.insert(file) == 1);
     }
 
     private boolean removeDBInfo(String fileId) {
-        return (fileDBService.delete(fileId) == 1) ? true : false;
+        return (fileDBService.delete(fileId) == 1);
     }
 
     private ResponseEntity<String> textResponse(HttpStatus status, String msg) {

@@ -67,7 +67,7 @@ var fileUploadOps = function () {
         }
 
         function cleanup() {
-            console.log("file select cleanup");
+            // console.log("file select cleanup");
             hideElement(fileInfoElem);
             selectedFile = null;
             pathElem.textContent = "";
@@ -168,7 +168,7 @@ var fileUploadOps = function () {
             }
         }
         var cleanup = ()=> {
-            console.log("dir select cleanup");
+            // console.log("dir select cleanup");
             hideElement(infoArea);
             newDir1.value = "";
             newDir2.value = "";
@@ -206,10 +206,15 @@ var fileUploadOps = function () {
     var uploadOps = function () {
         var uploadInfo = document.getElementById("upload-info");
         var uploadBtn = document.getElementById("upload-btn");
+        var cancelBtn = document.getElementById("cancel-upload-btn");
         var uploadState = document.getElementById("upload-state");
 
         function init() {
             uploadBtn.addEventListener("click", uploadBtnClicked);
+            cancelBtn.addEventListener("click", ()=> {
+                // console.log(location);
+                location.reload();
+            });
         }
 
         function uploadBtnClicked() {
@@ -256,7 +261,7 @@ var fileUploadOps = function () {
             err: "ERROR"
         }
         var clearMsg = ()=> {
-            console.log("upload cleanup");
+            // console.log("upload cleanup");
             uploadInfo.textContent = "";
             uploadState.textContent = "";
         };
@@ -305,7 +310,5 @@ var fileUploadOps = function () {
         cleanup: cleanup
     };
 }();
-
-fileUploadOps.init();
 
 
