@@ -49,10 +49,14 @@ public class Constants {
 	public class Attachment{
 		
 		public class Type{
-			public final static String PRODUCT_BASIC_INFO = "PRODUCT_BASIC_INFO";
+			public final static String PRODUCT_BASIC_INFO = "PRODUCT_BASIC_INFO";   //产品基本信息
+			public final static String ADVERTISMENT_PIC = "ADVERTISMENT_PIC";       //广告图片
+			public final static String ADVERTISMENT_VEDIO = "ADVERTISMENT_VEDIO";   //广告视频
+			public final static String ADVERTISMENT_AUDIO = "ADVERTISMENT_AUDIO";   //广告声频
 		}
 		public class Path {
 			public final static String PRODUCT_PIC_PATH = "/pms/";
+			public final static String ADVERTISMENT_FILE_PATH = "/ams/";
 		}
 	}
 	

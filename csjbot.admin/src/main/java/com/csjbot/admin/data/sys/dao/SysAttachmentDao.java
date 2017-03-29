@@ -19,6 +19,8 @@ public interface SysAttachmentDao {
     int updateByPrimaryKey(SysAttachment record);
 
 	SysAttachment getAttachByTransInfo(String transaction_id,String transaction_type);
+	
+	SysAttachment getAttachByTransInfo(String transaction_id,String transaction_type,String fileName);
 
 	void deleteByTransInfo(String transation_id, String transation_type);
 }

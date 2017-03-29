@@ -166,11 +166,8 @@ public class ProductController {
         SysAttachment attach = new SysAttachment();
         attach.setTransaction_id(pmsProduct.getId());
         attach.setTransaction_type(Constants.Attachment.Type.PRODUCT_BASIC_INFO);
-        attach.setOwner_fk(loginUser.getId());
-        attach.setCreator_fk(loginUser.getId());
         attach.setUpdater_fk(loginUser.getId());
         attach.setMemo(pmsProduct.getMemo());
-        attach.setSort(0);
         if (request instanceof MultipartHttpServletRequest) {
         	MultipartFile photo =  ((MultipartHttpServletRequest) request).getFile("photo");
 		    if (photo != null) {

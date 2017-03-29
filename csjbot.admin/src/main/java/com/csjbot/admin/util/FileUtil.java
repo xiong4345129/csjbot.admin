@@ -11,9 +11,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Random;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.csjbot.admin.backadmin.sys.service.SysAttachService;
@@ -38,6 +38,53 @@ public class FileUtil {
 	private String state = "";
 	private String originalName = "";
 	
+	public static byte[] getBytes(File file) throws IOException {
+        return FileUtils.readFileToByteArray(file);
+    }
+	
+	public String uploadAndModifyAttach(SysAttachment attach,String type, MultipartFile file, String dir, String foldername) {
+		url = "";
+		String fileName = file.getOriginalFilename();
+		if (attach.getTransaction_id()==null) {
+			return "error";
+		}
+		attach.setTransaction_type(type);
+		attach.setOriginal_name(fileName);
+		attach.setSuffix(this.getFileExt(fileName));
+		attach.setSize((int)file.getSize());
+		attach.setFile_type(file.getContentType());
+		fileName = getName(fileName);
+		attach.setAlias_name(fileName);
+		attach.setName(this.getFilePre(fileName));
+		
+		String folderUrl = dir + foldername;
+		File path = new File(folderUrl);
+		if (!path.exists()) {
+			try {
+				path.mkdirs();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		url = folderUrl + fileName;
+		File outFile = new File(url);
+		attach.setDirectory(folderUrl);
+		attach.setLocation(url);
+		SysAttachService attachService = ApplicationContextHelper.getBean(SysAttachService.class);
+		try {
+			file.transferTo(outFile);
+			attachService.insert(attach);
+			return this.url;
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return "error";
+	}
+	
 	public String uploadAndModifyAttach(SysAttachment attach, MultipartFile file, String dir, String foldername) {
 		url = "";
 		String fileName = file.getOriginalFilename();
@@ -50,6 +97,7 @@ public class FileUtil {
 		attach.setFile_type(file.getContentType());
 		fileName = getName(fileName);
 		attach.setAlias_name(fileName);
+		attach.setName(this.getFilePre(fileName));
 		
 		String folderUrl = dir + foldername;
 		File path = new File(folderUrl);
@@ -101,7 +149,7 @@ public class FileUtil {
 		}
 		return "error";
 	}
-
+	
 	/**
 	 * 鑾峰彇鏂囦欢鎵╁睍鍚?
 	 * 
@@ -109,6 +157,10 @@ public class FileUtil {
 	 */
 	private String getFileExt(String fileName) {
 		return fileName.substring(fileName.lastIndexOf("."));
+	}
+	
+	private String getFilePre(String fileName) {
+		return fileName.substring(0,fileName.lastIndexOf("."));
 	}
 
 	/**
