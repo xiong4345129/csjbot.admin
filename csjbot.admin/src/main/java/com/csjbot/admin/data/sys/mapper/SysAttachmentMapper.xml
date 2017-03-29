@@ -38,7 +38,17 @@
       select 
 	    <include refid="Base_Column_List" />
 	    from sys_attachment
-	    where transaction_id = #{transaction_id} and transaction_type = #{transaction_type}
+	    <where>
+			<if test="transaction_id != null and transaction_id !=''">
+				transaction_id = #{transaction_id}
+			</if>
+			<if test="transaction_type != null and transaction_type !=''">
+				and transaction_type = #{transaction_type}
+			</if>
+			<if test="name != null and name !=''">
+				and name = #{name}
+			</if>
+		</where>
   </select>
   <delete id="deleteByTransInfo" parameterType="map" >
     delete from sys_attachment

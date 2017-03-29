@@ -1,6 +1,9 @@
 package com.csjbot.admin.data.pms.dao;
 
+import java.util.Map;
+
 import com.csjbot.admin.data.pms.model.PmsAdvertisement;
+import com.csjbot.admin.page.Page;
 
 public interface PmsAdvertisementDao {
 	
@@ -17,4 +20,6 @@ public interface PmsAdvertisementDao {
     int updateByPrimaryKeySelective(PmsAdvertisement record);
 
     int updateByPrimaryKey(PmsAdvertisement record);
+	  
+    public <E, K, V> Page<E> pageAndSort(Map<String, Object> params,int current, int pagesize, String sortString);
 }

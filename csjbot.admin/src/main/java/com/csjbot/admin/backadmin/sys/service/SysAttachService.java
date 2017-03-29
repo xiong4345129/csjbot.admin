@@ -12,4 +12,7 @@ public interface SysAttachService {
     
     SysAttachment getAttachByTransInfo(String transaction_id , String transaction_type);
     
+    SysAttachment getAttachByTransInfo(String transaction_id , String transaction_type, String fileName);
+    
+    String filenameChange(String filename);
 }

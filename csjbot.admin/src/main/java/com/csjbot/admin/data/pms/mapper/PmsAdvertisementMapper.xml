@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="diggo.client.PmsAdvertisementMapper" >
-  <resultMap id="BaseResultMap" type="diggo.po.PmsAdvertisement" >
+<mapper namespace="com.csjbot.admin.data.pms.dao.PmsAdvertisementDao" >
+  <resultMap id="BaseResultMap" type="com.csjbot.admin.data.pms.model.PmsAdvertisement" >
     <id column="id" property="id" jdbcType="CHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="memo" property="memo" jdbcType="VARCHAR" />
@@ -14,25 +14,33 @@
   <sql id="Base_Column_List" >
     id, name, memo, valid, updater_fk, creator_fk, date_update, date_create
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="page" parameterType="map" resultMap="BaseResultMap">
+		select 
+		id, name, memo, valid, updater_fk, creator_fk, date_update, date_create
+		from pms_advertisement where valid = 1
+       <if test="name != null and name !=''">
+          and ( upper(`name`) LIKE CONCAT('%', #{name},'%'))
+       </if>                 
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
     select 
     <include refid="Base_Column_List" />
     from pms_advertisement
     where id = #{id,jdbcType=CHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="map" >
     delete from pms_advertisement
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="diggo.po.PmsAdvertisement" >
+  <insert id="insert" parameterType="com.csjbot.admin.data.pms.model.PmsAdvertisement" >
     insert into pms_advertisement (id, name, memo, 
-      valid, updater_fk, creator_fk, 
+      updater_fk, creator_fk, 
       date_update, date_create)
     values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
-      #{valid,jdbcType=TINYINT}, #{updater_fk,jdbcType=CHAR}, #{creator_fk,jdbcType=CHAR}, 
-      #{date_update,jdbcType=TIMESTAMP}, #{date_create,jdbcType=TIMESTAMP})
+      #{updater_fk,jdbcType=CHAR}, #{creator_fk,jdbcType=CHAR}, 
+      now(), now())
   </insert>
-  <insert id="insertSelective" parameterType="diggo.po.PmsAdvertisement" >
+  <insert id="insertSelective" parameterType="com.csjbot.admin.data.pms.model.PmsAdvertisement" >
     insert into pms_advertisement
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -87,7 +95,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="diggo.po.PmsAdvertisement" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.csjbot.admin.data.pms.model.PmsAdvertisement" >
     update pms_advertisement
     <set >
       <if test="name != null" >
@@ -106,15 +114,12 @@
         creator_fk = #{creator_fk,jdbcType=CHAR},
       </if>
       <if test="date_update != null" >
-        date_update = #{date_update,jdbcType=TIMESTAMP},
-      </if>
-      <if test="date_create != null" >
-        date_create = #{date_create,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </set>
     where id = #{id,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="diggo.po.PmsAdvertisement" >
+  <update id="updateByPrimaryKey" parameterType="com.csjbot.admin.data.pms.model.PmsAdvertisement" >
     update pms_advertisement
     set name = #{name,jdbcType=VARCHAR},
       memo = #{memo,jdbcType=VARCHAR},
