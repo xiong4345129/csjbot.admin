@@ -1,7 +1,11 @@
 package com.csjbot.admin.backadmin.tms.service.impl;
 
+import com.csjbot.admin.backadmin.tms.model.Result;
+import com.csjbot.admin.backadmin.tms.model.Result.PreDefined;
 import com.csjbot.admin.backadmin.tms.service.FSStoreService;
+import com.csjbot.admin.util.FileUtil;
 import org.apache.commons.io.FileUtils;
+import org.apache.xmlbeans.impl.common.SystemCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +19,21 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FSStoreServiceImpl implements FSStoreService {
+
+    private static final Boolean IS_WIN =
+        System.getProperty("os.name").toLowerCase().contains("windows");
+
     private static final Logger LOGGER = LoggerFactory.getLogger(FSStoreServiceImpl.class);
 
     private static final char SLASH = '/'; // tested ok, linux: genric, window: jvm auto convert
@@ -34,9 +45,16 @@ public class FSStoreServiceImpl implements FSStoreService {
 
     @Autowired
     public FSStoreServiceImpl(FileUploadProperties properties) {
-        this.baseDir = properties.getBaseDir();
+        String base = properties.getBaseDir();
+        int last = base.length() - 1;
+        this.baseDir = (base.charAt(last) == SLASH) ? base.substring(0, last) : base;
         this.checksumAlg = properties.getChecksumAlg();
         this.regex = properties.getFolderRegex();
+    }
+
+    @Override
+    public String getBaseDir() {
+        return baseDir;
     }
 
     @Override
@@ -60,18 +78,18 @@ public class FSStoreServiceImpl implements FSStoreService {
     }
 
     @Override
-    public boolean checkDirStrSyntax(String filePath) {
-        if (filePath == null || (filePath = filePath.trim()).length() == 0)
+    public boolean checkDirStrSyntax(String dirStr) {
+        if (dirStr == null || (dirStr = dirStr.trim()).length() == 0)
             return false;
-        int firstSlash = filePath.indexOf(SLASH);
-        int length = filePath.length();
+        int firstSlash = dirStr.indexOf(SLASH);
+        int length = dirStr.length();
         if (firstSlash != 0) {
             return false;
         } else if (length == 1) {
             return true;
         } else {
-            filePath = filePath.substring(1, length);
-            String[] subs = filePath.split("/");
+            dirStr = dirStr.substring(1, length);
+            String[] subs = dirStr.split("/");
             if (subs.length > 3) {
                 return false;
             } else {
@@ -84,44 +102,100 @@ public class FSStoreServiceImpl implements FSStoreService {
     }
 
     @Override
-    public boolean createDir(String filePath) {
-        File target = new File(baseDir + filePath);
-        if (target.exists()) {
-            return target.isDirectory();
+    public String composePathStr(String dirStr) {
+        if (dirStr.charAt(dirStr.length() - 1) != SLASH) dirStr = dirStr + SLASH;
+        return baseDir + dirStr;
+    }
+
+    @Override
+    public String composePathStr(String dirStr, String fileName) {
+        return composePathStr(dirStr) + fileName;
+    }
+
+    @Override
+    public Path getDirPath(String dirStr) {
+        return Paths.get(composePathStr(dirStr));
+    }
+
+    @Override
+    public Path getFilePath(String dirStr, String fileName) {
+        return Paths.get(composePathStr(dirStr, fileName));
+    }
+
+    @Override
+    public boolean exists(Path path) {
+        return path != null && Files.exists(path);
+    }
+
+    @Override
+    public boolean dirExists(Path dirPath) {
+        return exists(dirPath) && Files.isDirectory(dirPath);
+    }
+
+    @Override
+    public boolean dirExists(String dirStr) {
+        return dirExists(Paths.get(baseDir + dirStr));
+    }
+
+    @Override
+    public boolean fileExists(Path filePath) {
+        return exists(filePath) && Files.isRegularFile(filePath);
+    }
+
+
+    @Override
+    public boolean fileExists(String dirStr, String fileName) {
+        return fileExists(getFilePath(dirStr, fileName));
+    }
+
+    @Override
+    public Result createDir(String dirStr) {
+        Result res;
+        Path targetDir = Paths.get(baseDir + dirStr);
+        if (exists(targetDir)) {
+            res = Files.isDirectory(targetDir) ?
+                Result.success() : Result.from(PreDefined.EXISTING_FILE);
         } else {
-            return target.mkdirs();
+            try {
+                Path outDir = Files.createDirectories(targetDir);
+                res = dirExists(outDir) ? Result.success() : Result.from(PreDefined.SERVER_FAIL);
+            } catch (IOException e) {
+                LOGGER.error("createDir " + dirStr, e);
+                res = Result.from(PreDefined.SERVER_EXCEPTION);
+            }
         }
+        return res;
     }
 
     @Override
-    public boolean isFileExists(String filePath, MultipartFile file) {
-        File target = new File(compose(filePath, file.getOriginalFilename()));
-        return target.exists();
-    }
-
-    private String compose(String filePath, String fileName) {
-        if (filePath.charAt(filePath.length() - 1) != SLASH) filePath = filePath + SLASH;
-        return baseDir + filePath + fileName;
-    }
-
-    @Override
-    public boolean store(String filePath, MultipartFile file) {
-        boolean res;
-        String targetDir = baseDir + filePath;
-        String targetFile = targetDir + SLASH + file.getOriginalFilename();
+    public Result store(String dirStr, MultipartFile file) {
+        Result res;
+        String targetDir = composePathStr(dirStr);
+        String targetFile = composePathStr(dirStr, file.getOriginalFilename());
         File target = new File(targetFile);
         try {
             Path path = target.toPath();
             Files.copy(file.getInputStream(), path);
             genChecksum(path);
             checkedUnzip(targetFile);
-            res = true;
+            res = Result.success();
         } catch (IOException e) {
             LOGGER.error("store " + target.getAbsolutePath(), e);
-            res = false;
+            res = Result.from(PreDefined.SERVER_EXCEPTION);
         }
         return res;
     }
+
+    // private static final String PERM_DIR_DEFAULT = "rwxrwxr-x";
+    // private static final String PERM_FILE_DEFAULT = "rw-rw-r--";
+
+    // private void assignPermissions(Path path, String permStr) {
+    //     try {
+    //         Files.setPosixFilePermissions(path, PosixFilePermissions.fromString(permStr));
+    //     } catch (IOException e) {
+    //         LOGGER.error("assign permission", path.toString() + " " + permStr);
+    //     }
+    // }
 
     // todo
     public String genChecksum(Path path) {
@@ -146,14 +220,16 @@ public class FSStoreServiceImpl implements FSStoreService {
     }
 
     // todo
-    private static void checkedUnzip(String fileFullPath) {
-        String outDir = stripZipFileExt(fileFullPath);
+    private void checkedUnzip(String fileFullPath) {
+        String outDirStr = stripZipFileExt(fileFullPath);
         if (isZipFile(fileFullPath)) {
-            String tempDir = outDir + ".unzip";
+            String tempDirStr = outDirStr + ".unzip";
+            Path outDir = Paths.get(outDirStr);
+            Path tempDir = Paths.get(tempDirStr);
             try {
-                UnZip.unzip(fileFullPath, tempDir);
-                Files.move(Paths.get(tempDir), Paths.get(outDir));
-                FileUtils.deleteDirectory(new File(tempDir));
+                UnZip.unzip(fileFullPath, tempDirStr);
+                Files.move(tempDir, outDir);
+                FileUtils.deleteDirectory(new File(tempDirStr));
             } catch (IOException e) {
                 LOGGER.error("unzip " + fileFullPath, e);
             }
@@ -170,12 +246,12 @@ public class FSStoreServiceImpl implements FSStoreService {
 
     private static String stripZipFileExt(String fileName) {
         int dot = fileName.lastIndexOf(".");
-        return fileName.substring(0, dot);
+        return (dot > 0) ? fileName.substring(0, dot) : fileName;
     }
 
     @Override
     public boolean delete(String filePath, String fileName) {
-        String fullPath = compose(filePath, fileName);
+        String fullPath = composePathStr(filePath, fileName);
         boolean deleteOk = checkedDelete(fullPath);// original file
         checkedDelete(getSigFileName(fullPath)); // checksum file
         if (isZipFile(fileName)) checkedDelete(stripZipFileExt(fullPath));

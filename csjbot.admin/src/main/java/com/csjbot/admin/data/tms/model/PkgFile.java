@@ -16,9 +16,9 @@ public class PkgFile implements Serializable {
 
     public PkgFile() { }
 
-    public PkgFile(String fileName, String filePath, Date uploadTime) {
+    public PkgFile(String fileName, String dirPath, Date uploadTime) {
         this.name = fileName;
-        this.path = filePath;
+        this.path = dirPath;
         this.uploadTime = uploadTime;
     }
 

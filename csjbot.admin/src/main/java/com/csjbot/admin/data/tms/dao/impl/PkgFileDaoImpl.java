@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Collections.singletonMap;
 
@@ -50,5 +52,13 @@ public class PkgFileDaoImpl implements PkgFileDao {
     @Override
     public <V> List<V> getDistinct(String fieldName) {
         return dao.find(getStatement("getDistinct"), singletonMap("fieldName", fieldName));
+    }
+
+    @Override
+    public <V> List<V> getLike(String ptn, String orderBy) {
+        Map<String, String> params = new HashMap<>();
+        params.put("ptn", ptn);
+        params.put("col", orderBy);
+        return dao.find(getStatement("getLike"), params);
     }
 }
