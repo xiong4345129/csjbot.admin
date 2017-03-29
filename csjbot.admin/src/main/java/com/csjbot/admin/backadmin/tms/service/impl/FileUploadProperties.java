@@ -24,17 +24,43 @@ public class FileUploadProperties {
 
     public String getBaseDir() {
         String baseDir = properties.getProperty("pkg.store.base.dir");
-        if (baseDir == null) throw new NullPointerException("baseDir");
+        if (isEmpty(baseDir)) throw new NullPointerException("baseDir");
         return baseDir;
     }
 
     public String getChecksumAlg() {
         String checksumAlg = properties.getProperty("pkg.store.checksum");
-        return (checksumAlg == null) ? "SHA1" : checksumAlg;
+        return replaceEmpty(checksumAlg, "SHA1");
     }
 
     public String getFolderRegex() {
         String folderRegex = properties.getProperty("pkg.store.folder.regex");
-        return (folderRegex == null) ? "[0-9a-zA-Z-_]{3,20}" : folderRegex;
+        return replaceEmpty(folderRegex, "[0-9a-zA-Z-_]{3,20}");
+    }
+
+    public String getBaseUrl() {
+        String url = properties.getProperty("pkg.download.base.url");
+        if (isEmpty(url)) throw new NullPointerException("baseUrl");
+        return url;
+    }
+
+    private boolean isEmpty(String str) {
+        return str == null || str.trim().length() == 0;
+    }
+
+    private String replaceEmpty(String orig, String alter) {
+        return isEmpty(orig) ? alter : orig;
+    }
+
+
+    private String replaceChar(String str, int index, CharSequence ch) {
+        int len = str.length();
+        if (index >= 0 && index < len)
+            str = str.substring(0, index) + ch + str.substring(index + 1, len);
+        return str;
+    }
+
+    private String replaceCharIf(String str, int index, char orig, CharSequence ch) {
+        return (str.charAt(index) == orig) ? replaceChar(str, index, ch) : str;
     }
 }

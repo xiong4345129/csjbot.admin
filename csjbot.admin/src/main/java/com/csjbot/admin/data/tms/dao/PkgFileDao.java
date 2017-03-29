@@ -21,4 +21,6 @@ public interface PkgFileDao {
     int delete(String id);
 
     <V> List<V> getDistinct(String fieldName);
+
+    <V> List<V> getLike(String ptn, String orderBy); // todo
 }
