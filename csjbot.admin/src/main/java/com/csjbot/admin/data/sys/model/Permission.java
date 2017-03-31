@@ -5,11 +5,6 @@ import java.util.Date;
 
 import com.csjbot.admin.util.StringUtil;
 
-/**
- * 
- * @author xiaoming
- * 
- */
 public class Permission implements Serializable {
 
     private static final long serialVersionUID = -4135478165368593061L;
@@ -21,12 +16,18 @@ public class Permission implements Serializable {
     private String name;
 
     private String memo;
+    
+    private int type;
 
-    private Date dateOfCreate = new Date();
+    private String creator_fk;
+    
+    private String updater_fk;
+    
+    private Date dateOfCreate;
 
-    private Date dateOfUpdate = new Date();
+    private Date dateOfUpdate;
 
-    private boolean isValid = true;
+    private int isValid = 1;
 
     public String getId() {
         return id;
@@ -52,12 +53,36 @@ public class Permission implements Serializable {
         this.name = name;
     }
 
+    public String getCreator_fk() {
+        return creator_fk;
+    }
+
+    public void setCreator_fk(String creator_fk) {
+        this.creator_fk = creator_fk;
+    }
+
+    public String getUpdater_fk() {
+        return updater_fk;
+    }
+
+    public void setUpdater_fk(String updater_fk) {
+        this.updater_fk = updater_fk;
+    }
+
     public String getMemo() {
         return memo;
     }
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public Date getDateOfCreate() {
@@ -76,11 +101,12 @@ public class Permission implements Serializable {
         this.dateOfUpdate = dateOfUpdate;
     }
 
-    public boolean isValid() {
+    
+    public int getIsValid() {
         return isValid;
     }
 
-    public void setValid(boolean isValid) {
+    public void setIsValid(int isValid) {
         this.isValid = isValid;
     }
 

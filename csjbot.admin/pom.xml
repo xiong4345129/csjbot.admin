@@ -15,8 +15,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.3</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
       <plugin>
@@ -39,7 +39,7 @@
           <minimumPriority>3</minimumPriority>
           <linkXref>false</linkXref>
           <minimumTokens>100</minimumTokens>
-          <targetJdk>1.7</targetJdk>
+          <targetJdk>1.8</targetJdk>
           <aggregate>true</aggregate>
           <detail>true</detail>
           <includeXmlInSite>true</includeXmlInSite>

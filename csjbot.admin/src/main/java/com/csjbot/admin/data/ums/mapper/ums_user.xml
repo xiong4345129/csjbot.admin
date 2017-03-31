@@ -16,6 +16,7 @@
 		<result property="sex" column="sex" />
 		<result property="idCard" column="idCard" />
 		<result property="isSuperAdmin" column="is_super_admin" />
+		<result property="passwordChanged" column="password_changed" />
 		<result property="lastLoginTime" column="last_login_time" />
 		<result property="status" column="status" />
 		<result property="dateEffect" column="date_effect" />
@@ -37,6 +38,7 @@
 		sex            ,
 		idCard         ,
 		is_super_admin ,
+		password_changed ,
 		last_login_time,
 		status         ,
 		date_effect    ,
@@ -103,6 +105,7 @@
 		sex            ,
 		idCard         ,
 		is_super_admin ,
+		password_changed ,
 		last_login_time,
 		status         ,
 		date_effect    ,
@@ -163,6 +166,7 @@
 			#{sex},
 			#{idCard},
 			#{isSuperAdmin},
+			#{passwordChanged},
 			#{lastLoginTime},
 			#{status},
 			#{dateEffect},
@@ -186,6 +190,7 @@
 		sex            ,
 		idCard         ,
 		is_super_admin ,
+		password_changed ,
 		last_login_time,
 		status         ,
 		DATE_FORMAT(date_effect,'%Y-%m-%d %H-%i-%s') as date_effect  ,
@@ -239,6 +244,9 @@
 			</if>
 			<if test="password !=null and password !=''">
 				password=#{password},
+			</if>
+			<if test="passwordChanged !=null and passwordChanged !=''">
+				password_changed=#{passwordChanged},
 			</if>
 			<if test="salt !=null and salt !=''">
 				salt=#{salt},

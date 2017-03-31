@@ -39,8 +39,8 @@
   <script src="${path}/resources/jquery-validation/1.11.1/messages_bs_zh.js"></script>
   
   <!-- 提示框控件 -->
-  <script src="${path }/scripts/plugins/jquery.bravoui.core.js" ></script>
-  <script src="${path}/scripts/plugins/jquery.bravoui.ui.js"></script>
+  <script src="${path }/scripts/plugins/jquery.csjbotui.core.js" ></script>
+  <script src="${path}/scripts/plugins/jquery.csjbotui.ui.js"></script>
   
   <!-- ace模板 -->
   <link rel="stylesheet" href="${path}/resources/ace/css/ace.min.css" />
@@ -58,10 +58,6 @@
   <script src="${path}/resources/ace/js/ace-elements.min.js"></script>
   <script src="${path}/resources/ace/js/ace.min.js"></script>
   
-  <!-- eCharts JS -->
-  <script src="${path }/resources/echarts-2.2.1/echarts.js" ></script>
-  <script src="${path }/scripts/common/common.js" ></script>
-  
   <!-- select  控件 -->
-  <link rel="stylesheet" type="text/css" href="${path }/css/report/select.css" />
-  <script src="${path}/resources/plugins/select/select.js"></script>
+ <%--  <link rel="stylesheet" type="text/css" href="${path }/css/report/select.css" />
+  <script src="${path}/resources/plugins/select/select.js"></script> --%>

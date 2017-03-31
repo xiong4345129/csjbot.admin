@@ -23,4 +23,5 @@
       
 <script>
 	_path = "${path }";
+	_admin = "/admin/";
 </script>

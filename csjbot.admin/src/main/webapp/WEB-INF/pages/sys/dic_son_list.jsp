@@ -24,7 +24,7 @@
         });
     </script>
     <script src="${path }/scripts/sys/dic_son_list.js"></script>
-    <script src="${path }/scripts/plugins/datatable/jquery.bravoui.datatable.js"></script>
+    <script src="${path }/scripts/plugins/datatable/jquery.csjbotui.datatable.js"></script>
     
     <style>
         .operation-column a {

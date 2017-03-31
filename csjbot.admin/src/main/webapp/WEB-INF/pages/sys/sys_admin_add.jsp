@@ -6,7 +6,7 @@
 <head>
     <jsp:include page="../common/meta.jsp" />
     <jsp:include page="../common/resources.jsp" />
-    <script src="${path }/scripts/sys/sys_admin_add.js"></script>
+    <script src="${path }/scripts/sys/sys_admin_add.js"></script>    
     <script type="text/javascript">
         $(function(){
             $("#sys_admin").addClass("active");
@@ -31,8 +31,8 @@
                             <a href="${path}/">首页</a>
                         </li>
                         <li class="active">系统配置</li>
-                        <li><a href="${path}/sys/admin/list">系统管理员</a></li>
-                        <li class="active">新增用户</li>
+                        <li><a href="${path}/sys/admin/list">账号管理</a></li>
+                        <li class="active">新增账号</li>
                     </ul><!-- .breadcrumb -->
                 </div>
             
@@ -42,11 +42,11 @@
 	                    <div class="panel-heading">
 	                        <table style="width: 99%;">
 	                            <tr>
-	                                <td style="width: 4%;text-align: left;" nowrap="nowrap"><a
+	                                <td style="width: 4%;text-align: left;" ><a
 	                                    class="btn btn-primary" type="button"
 	                                    href="${path }/sys/admin/list">返回</a></td>
 	                                <td class="panel-title"
-	                                    style="width: 96%;text-align: center;font-weight:bold">新增用户</td>
+	                                    style="width: 96%;text-align: center;font-weight:bold">新增账号</td>
 	                            </tr>
 	                        </table>
 	                    </div>
@@ -196,9 +196,73 @@
 	                                                </div>
 	                                            </div>
 	                                        </div>
+<!-- 	                                        <div class="col-md-6">
+	                                             <div class="form-group">
+	                                                 <div class="input-group">租户查看权限
+	                                                  <label class="radio-inline radioList-horizontal-first">
+	                                                     <input type="radio" name="read_group" id="read_group" value="0" checked onclick="appointTenant1();">个人
+	                                                  </label> 
+	                                                  <label class="radio-inline"> 
+	                                                     <input type="radio" name="read_group" id="read_group" value="1" onclick="appointTenant1();">团队
+	                                                  </label>
+	                                                  cgy
+			                                          <label class="radio-inline"> 
+			                                              <input class="appointTenantClass" type="radio" name="read_group" id="read_group1" value="2" onclick="appointTenant2();">指定租户
+			                                          </label>
+		                                          	  cgy end
+	                                                 </div>
+	                                             </div>
+                                           </div>  -->
 	                                    </div>
 	                                </div>
 	
+									<!-- cgy -->
+									<%-- <div class="appointCont row">
+										<div class="col-md-12">
+											<div id="appoint" class="col-md-6">
+												
+												<table id="tp" class="table table-striped table-hover table-bordered table-responsive" data-url="${path }/tms/pageAndSort">
+									                <thead>
+									                  <tr>
+									                    <th class="check-column"><input type="checkbox" id="select-all" name="select-all" value="true" onclick="selectAll();"/></th>
+									                    <th>租户名称</th>
+									                    <th>二级域名</th>
+									                    <th>状态</th>
+									                  </tr>
+									                </thead>
+									                <tbody>
+									                  <c:if test="${tenants eq null}">
+									                  <tr>
+									                    <td colspan=99><span>没有可用的用户</span></td>
+									                  </tr>
+									                  </c:if>
+									                  
+									                  <c:forEach var="tenants" items="${tenants}" varStatus="status">
+									                  <tr>
+									                    <td>
+									                      <input type="checkbox" id="userTenantRefCheckid" name="userTenantRefCheckid" value="${tenants.id }"  />
+									                    </td>
+									                    <td>${tenants.name }</td>
+									                    <td>${tenants.domain }</td>
+									                    <c:if test="${tenants.status eq 0 }">
+									                    <td>停止</td>	
+									                    </c:if>	
+									                    <c:if test="${tenants.status eq 1 }">
+									                    <td>启动</td>	
+									                    </c:if>	
+									                    <c:if test="${tenants.status eq 2 }">
+									                    <td>异常</td>	
+									                    </c:if>								                    
+									                  </tr>
+									                  </c:forEach>
+									                </tbody>
+									              </table>
+											
+											</div>
+										</div>
+									</div> --%>
+									<!-- cgy end -->
+									
 	                                <div class="text-center">
 	                                    <button type="button" class="btn btn-primary"
 	                                        onclick="addUser(2)">保存并新增</button>

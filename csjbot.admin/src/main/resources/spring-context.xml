@@ -11,16 +11,12 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 <!-- 项目classpath -->
-<context:property-placeholder ignore-resource-not-found="false" location="classpath*:/jdbc.properties" />
-<util:properties id="appconfig" location="classpath:config.properties"/>
+<!-- <context:property-placeholder ignore-resource-not-found="false" location="classpath*:/jdbc.properties" />
+<util:properties id="appconfig" location="classpath:config.properties"/> -->
 <!-- 服务器  linux-->
-<!-- <context:property-placeholder ignore-resource-not-found="false" location="file:/opt/config/jdbc.properties" /> -->
-<!-- 服务器  windows-->
-<!--<context:property-placeholder ignore-resource-not-found="false" location="file:///E://config/jdbc.properties" />
-<util:properties id="appconfig" location="file:///E://config/config.properties"/>-->
+<context:property-placeholder ignore-resource-not-found="false" location="file:/opt/config/jdbc.properties" />
+<util:properties id="appconfig" location="file:/opt/config/config.properties"/> 
 
- 
-  
   <context:component-scan base-package="com.csjbot.admin.*">
     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
   </context:component-scan>
@@ -48,7 +44,9 @@
         </array>
     </property>
   </bean>
-  
+
+  <bean id="SpringApplicationContext" class="com.csjbot.admin.util.ApplicationContextHelper"></bean>
+
   <bean id="paginationInterceptor" class="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
 	  <property name="properties">  
          <props>
@@ -65,41 +63,6 @@
 	 <constructor-arg index="0" ref="sqlSessionTemplate" />
   </bean>
   
-  
-   <!-- 与金保接口数据直接写入金保数据库 -->
-	<!-- <bean id="dataSourceJB" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass" value="${jdbc.driver}" />
-		<property name="jdbcUrl" value="${jdbc.jb.url}" />
-		<property name="user" value="${jdbc.jb.username}" />
-		<property name="password" value="${jdbc.jb.password}" />
-		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
-		<property name="minPoolSize" value="${jdbc.minPoolSize}" />
-		<property name="initialPoolSize" value="${jdbc.initialPoolSize}" />
-		<property name="maxIdleTime" value="${jdbc.maxIdleTime}" />
-		<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}" />
-	</bean>
-
-	<bean id="sqlSessionFactoryJB" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSourceJB" />
-		<property name="configLocation" value="classpath:sqlmap-config.xml" />
-		<property name="typeAliasesPackage" value="com.csjbot.admin.api.data.model" />
-		<property name="mapperLocations" value="classpath*:com/csjbot/admin/api/data/mapper/*.xml" />
-		<property name="plugins">
-			<array>
-				<ref bean="paginationInterceptor" />
-			</array>
-		</property>
-	</bean>
-	
-	  <bean id="sqlSessionTemplateJB" class="org.mybatis.spring.SqlSessionTemplate">
-		 <constructor-arg index="0" ref="sqlSessionFactoryJB" />
-	  </bean>
-	
-	  <bean id="sqlSessionDaoSupportJB" class="com.csjbot.admin.api.data.sqlSessionDaoSupportJB">
-		 <constructor-arg index="0" ref="sqlSessionTemplateJB" />
-	  </bean> -->
-  
-	
 	<!-- transaction manager, use JtaTransactionManager for global tx -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />

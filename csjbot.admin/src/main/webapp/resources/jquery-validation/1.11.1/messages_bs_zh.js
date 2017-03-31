@@ -31,6 +31,10 @@ jQuery.validator.addMethod("isEnglishNum", function(value, element) {
     return this.optional(element) || (englishNum.test(value));
 }, "只能输入字母和数字");
 
+jQuery.validator.addMethod("isEnglishNumSymbol", function(value, element) {   
+    var englishNum =  /^[0-9a-zA-Z_]+$/;
+    return this.optional(element) || (englishNum.test(value));
+}, "只能输入字母、数字和下划线");
 
 jQuery.validator.addMethod("isPassword", function(value, element) {   
     var password = /^[a-zA-Z0-9_!@#$%^&*()+.~`,<>{}\|-]+$/;
@@ -41,5 +45,25 @@ jQuery.validator.addMethod("isLowercaseNum", function(value, element) {
     var englishNum =  /^[0-9a-z]+$/;
     return this.optional(element) || (englishNum.test(value));
 }, "只能输入小写字母和数字");
+
+jQuery.validator.addMethod("isVersionNum", function(value, element) {   
+    var englishNum = /^[\x00-\xff]+$/;
+    return this.optional(element) || (englishNum.test(value));
+}, "不能输入中文、中文标点");
+
+jQuery.validator.addMethod("spaceNotAllow", function(value, element) {   
+    var englishNum = /^[^\s]+$/;
+    return this.optional(element) || (englishNum.test(value));
+}, "输入的内容不能有空格");
+
+jQuery.validator.addMethod("isFloatNum2", function(value, element) {   
+    var englishNum =  /^[1-9]{1}[0-9]{0,10}(\.[0-9]{0,2})?$/;
+    return this.optional(element) || (englishNum.test(value));
+}, "请输入数字, 支持2位小数, 整数位不能超过11位");
+
+jQuery.validator.addMethod("isFloatNum", function(value, element) {   
+    var englishNum =  /^[1-9]{1}[0-9]{0,10}(\.[0-9]{0,1})?$/;
+    return this.optional(element) || (englishNum.test(value));
+}, "请输入数字, 支持1位小数, 整数位不能超过11位");
 
 

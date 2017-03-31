@@ -25,7 +25,7 @@
         }
     </style>
     <script src="${path }/scripts/sys/dic_father_list.js"></script>
-    <script src="${path }/scripts/plugins/datatable/jquery.bravoui.datatable.js"></script>
+    <script src="${path }/scripts/plugins/datatable/jquery.csjbotui.datatable.js"></script>
     <script>
         function operation(data, el) {
 

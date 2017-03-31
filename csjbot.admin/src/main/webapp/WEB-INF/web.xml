@@ -49,4 +49,12 @@
     <param-name>webAppRootKey</param-name>
     <param-value>admin.root</param-value>
   </context-param>
+<!-- log4jConfigLocation：log4j配置文件存放路径 -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:log4j.properties</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>  
 </web-app>
