@@ -38,7 +38,7 @@ $(function() {
 					data : "name",
 					width : "15%"
 				}, {
-					title : "价格",
+					title : "价格(元)",
 					data : "price",
 					width : "15%"
 				}, {
