@@ -65,5 +65,8 @@ jQuery.validator.addMethod("isFloatNum", function(value, element) {
     var englishNum =  /^[1-9]{1}[0-9]{0,10}(\.[0-9]{0,1})?$/;
     return this.optional(element) || (englishNum.test(value));
 }, "请输入数字, 支持1位小数, 整数位不能超过11位");
-
+jQuery.validator.addMethod("isFloatNum3", function(value, element) {   
+    var englishNum =  /^[0-9]+$/;
+    return this.optional(element) || (englishNum.test(value));
+}, "请输入数字, 只能输入整数");
 
