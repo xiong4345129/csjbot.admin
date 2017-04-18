@@ -202,8 +202,10 @@ public class ProductController {
 	    String msg = ResultEntity.KW_STATUS_SUCCESS;
 	    PmsProduct pmsProduct = pmsService.selectByPrimaryKey(id);
 	    try {
-	    	attachService.deleteByTransInfo(pmsProduct.getId(),Constants.Attachment.Type.PRODUCT_BASIC_INFO);
-		    pmsService.deleteByPrimaryKey(id);
+//	    	attachService.deleteByTransInfo(pmsProduct.getId(),Constants.Attachment.Type.PRODUCT_BASIC_INFO);
+//		    pmsService.deleteByPrimaryKey(id);
+	    	pmsProduct.setValid(0); //由于有产品订单关联，订单需要保留改为软删除
+	    	pmsService.update(pmsProduct);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}

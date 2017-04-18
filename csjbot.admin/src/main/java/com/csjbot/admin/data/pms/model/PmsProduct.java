@@ -20,7 +20,7 @@ public class PmsProduct extends PaginationParam{
 
     private String memo;
 
-    private Byte valid;
+    private int valid;
 
     private String updater_fk;
 
@@ -62,11 +62,11 @@ public class PmsProduct extends PaginationParam{
         this.memo = memo;
     }
 
-    public Byte getValid() {
+    public int getValid() {
         return valid;
     }
 
-    public void setValid(Byte valid) {
+    public void setValid(int valid) {
         this.valid = valid;
     }
 
