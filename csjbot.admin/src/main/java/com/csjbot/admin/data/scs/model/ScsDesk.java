@@ -48,6 +48,18 @@ public class ScsDesk extends PaginationParam{
 	private Date date_update;
 	
 	private Date date_create;
+	
+	private Byte desk_type;
+	
+	
+    
+	public Byte getDesk_type() {
+		return desk_type;
+	}
+
+	public void setDesk_type(Byte desk_type) {
+		this.desk_type = desk_type;
+	}
 
 	public String getId() {
 		return id;

@@ -13,6 +13,11 @@ $(function(){
 	                required : true,
 	                rangelength:[0, 100]
 	            },
+	            desk_type : {  
+	                required : true,
+	                isFloatNum3:true,
+	                rangelength:[0, 2]
+	            },
 	            deskx : {  
 	                required : true,
 	                isFloatNum3: true
@@ -45,23 +50,26 @@ $(function(){
 	            alias : {  
 	                required : "必须填写桌号别名."
 	            },
+	            desk_type : {  
+	                required : "必须填写桌号类型."
+	            },
 	            deskx : {  
-	                required : "必须填写桌号别名."
+	                required : "必须填写坐标X."
 	            },
 	            desky : {  
-	                required : "必须填写桌号别名."
+	                required : "必须填写坐标Y."
 	            },
 	            deskz : {  
-	                required : "必须填写桌号别名."
+	                required : "必须填写坐标Z."
 	            },
 	            deskw : {  
-	                required : "必须填写桌号别名."
+	                required : "必须填写坐标W."
 	            },
 	            deskv : {  
-	                required : "必须填写桌号别名."
+	                required : "必须填写坐标V."
 	            },
 	            deskq : {  
-	                required : "必须填写桌号别名."
+	                required : "必须填写坐标Q."
 	            }
 	        },
 	        highlight : function(element) {  
