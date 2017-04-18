@@ -56,7 +56,7 @@ $(function() {
 					style : "operation-column"
 				}],
 				columnDefs: [{ 
-		               targets: [ 3 ],
+					   targets: [ 3 ],
 		               render: function ( data, type, row ) {
 		            	   var datetime = new Date(Number(row.date_create)).Format( "yyyy-MM-dd HH:mm");
 		                   return datetime;
@@ -76,6 +76,7 @@ $(function() {
 				},
 		        emptyMsg : "查无结果"
 		 };
+		
 		 return options;
 	}
 	initable = initOptions();
