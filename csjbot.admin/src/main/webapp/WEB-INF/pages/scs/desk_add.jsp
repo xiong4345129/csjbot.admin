@@ -129,7 +129,7 @@
 												<div class="form-group">
 													<div class="input-group">
 														<div class="input-group-addon">备注</div>
-														<textArea class="form-control" id="memo" name="memo" maxlength="256" style="resize:none" rows="4"></textArea>
+														<textArea class="form-control" id="memo" name="memo" maxlength="512" style="resize:none" rows="4"></textArea>
 													</div>
 												</div>
 											</div>
