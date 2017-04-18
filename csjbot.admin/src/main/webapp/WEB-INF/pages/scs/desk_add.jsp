@@ -68,6 +68,14 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<div class="input-group">
+														<div class="input-group-addon">桌位类型</div>
+                                              		    <input  class="form-control" type="text" id="desk_type" name="desk_type"  maxlength="2" placeholder="请输入桌位类型"/> 
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<div class="input-group">
 														<div class="input-group-addon">坐标X</div>
                                               		    <input  class="form-control" type="text" id="deskx" name="deskx"  maxlength="6" placeholder="请输入坐标X"/> 
 													</div>
@@ -121,7 +129,7 @@
 												<div class="form-group">
 													<div class="input-group">
 														<div class="input-group-addon">备注</div>
-														<textArea class="form-control" id="memo" name="memo" maxlength="256" style="resize:none" rows="4"></textArea>
+														<textArea class="form-control" id="memo" name="memo" maxlength="512" style="resize:none" rows="4"></textArea>
 													</div>
 												</div>
 											</div>

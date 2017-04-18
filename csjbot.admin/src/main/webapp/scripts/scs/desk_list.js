@@ -36,39 +36,43 @@ $(function() {
 				columns : [{
 					title : "桌号",
 					data : "number",
-					width : "10%"
+					width : "7%"
 				}, {
 					title : "桌号别名",
 					data : "alias",
 					width : "10%"
 				}, {
+					title : "桌位类型",
+					data : "desk_type",
+					width : "8%"
+				}, {
 					title : "备注",
 					data : "memo",
 					width : "10%"
 				}, {
-					title : "坐标 X",
+					title : "坐标X",
 					data : "deskx",
-					width : "8%"
+					width : "7%"
 				}, {
-					title : "坐标 Y",
+					title : "坐标Y",
 					data : "desky",
-					width : "8%"
+					width : "7%"
 				}, {
-					title : "坐标 Z",
+					title : "坐标Z",
 					data : "deskz",
-					width : "8%"
+					width : "7%"
 				}, {
-					title : "坐标 W",
+					title : "坐标W",
 					data : "deskw",
-					width : "8%"
+					width : "7%"
 				}, {
-					title : "坐标 V",
+					title : "坐标V",
 					data : "deskv",
-					width : "8%"
+					width : "7%"
 				}, {
-					title : "坐标 Q",
+					title : "坐标Q",
 					data : "deskq",
-					width : "8%"
+					width : "7%"
 				}, {
 					title : "创建时间",
 					data : "date_create",
@@ -80,7 +84,7 @@ $(function() {
 					style : "operation-column"
 				}],
 				columnDefs: [{ 
-		               targets: [ 9 ],
+		               targets: [ 10 ],
 		               render: function ( data, type, row ) {
 		            	   var datetime = new Date(Number(row.date_create)).Format( "yyyy-MM-dd HH:mm");
 		            	 //  alert(new Date(Number(row.date_create)).Format( "yyyy-MM-dd HH:mm"));
@@ -88,11 +92,11 @@ $(function() {
 		               }
 				},
 	           {
-	               targets: [ 10 ],
+	               targets: [ 11 ],
 	               render: operation,
 	               orderable: false
 	           }],
-		        order: [[ 9, 'desc' ]],
+		        order: [[ 10, 'desc' ]],
 		        remoteSort : true,
 				pagination : true,
 				paginationParam : {

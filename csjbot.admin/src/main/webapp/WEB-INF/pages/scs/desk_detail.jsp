@@ -149,6 +149,18 @@
 									</div>
 									<div class="row">
 										<div class="col-md-12">
+											<div class="col-md-6">
+												<div class="form-group">
+													<div class="input-group">
+														<div class="input-group-addon">桌位类型</div>
+														<input  class="form-control" type="data" id="desk_type" name="desk_type"  maxlength="30" value="${desk.desk_type}" readonly />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
 											<div class="col-md-12">
 												<div class="form-group">
 													<div class="input-group">

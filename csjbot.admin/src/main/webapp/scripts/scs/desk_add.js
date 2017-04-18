@@ -10,31 +10,28 @@ $(function(){
 	                rangelength:[0, 100]
 	            },
 	            alias : {  
-	                required : true,
 	                rangelength:[0, 100]
 	            },
+	            desk_type : {  
+	                isFloatNum3:true,
+	                rangelength:[0, 2]
+	            },
 	            deskx : {  
-	                required : true,
 	                isFloatNum3: true
 	            },
 	            desky : {  
-	                required : true,
 	                isFloatNum3:true
 	            },
 	            deskz : {  
-	                required : true,
 	                isFloatNum3:true
 	            },
 	            deskw : {  
-	                required : true,
 	                isFloatNum3:true
 	            },
 	            deskv : {  
-	                required : true,
 	                isFloatNum3:true
 	            },
 	            deskq : {  
-	                required : true,
 	                isFloatNum3:true
 	            },
 	        },  
@@ -42,27 +39,6 @@ $(function(){
 	        	number : {  
 	                required : "必须填写桌号."
 	            },
-	            alias : {  
-	                required : "必须填写桌号别名."
-	            },
-	            deskx : {  
-	                required : "必须填写桌号别名."
-	            },
-	            desky : {  
-	                required : "必须填写桌号别名."
-	            },
-	            deskz : {  
-	                required : "必须填写桌号别名."
-	            },
-	            deskw : {  
-	                required : "必须填写桌号别名."
-	            },
-	            deskv : {  
-	                required : "必须填写桌号别名."
-	            },
-	            deskq : {  
-	                required : "必须填写桌号别名."
-	            }
 	        },
 	        highlight : function(element) {  
 	            $(element).closest('.form-group').addClass('has-error');  

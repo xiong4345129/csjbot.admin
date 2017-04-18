@@ -18,10 +18,11 @@
         <result column="creator_fk" property="creator_fk" jdbcType="CHAR" />
         <result column="date_update" property="date_update" jdbcType="TIMESTAMP" />
         <result column="date_create" property="date_create" jdbcType="TIMESTAMP" />
+        <result column="desk_type" property="desk_type" jdbcType="TINYINT" />
     </resultMap>
     
     <sql id="Base_Column_List" >
-      id, number, alias, memo, valid, deskx, desky, deskz, deskw, deskv, deskq, updater_fk, creator_fk, date_update, date_create
+      id, number, alias, memo, valid, desk_type, deskx, desky, deskz, deskw, deskv, deskq, updater_fk, creator_fk, date_update, date_create
     </sql>
     
       <select id="page" parameterType="map" resultMap="BaseResultMap">
@@ -45,11 +46,11 @@
        </select>
        
        <insert id="insert" parameterType="com.csjbot.admin.data.scs.model.ScsDesk" >
-         insert into scs_desk_info (id, number, alias, memo, valid, deskx, desky, deskz, deskw,
+         insert into scs_desk_info (id, number, alias, memo, valid, desk_type, deskx, desky, deskz, deskw,
                                   deskv, deskq, updater_fk, creator_fk, date_update, date_create
                                   )
-          values (#{id,jdbcType=CHAR}, #{number,jdbcType=VARCHAR}, #{alias,jdbcType=DECIMAL}, #{memo,jdbcType=VARCHAR}, 1, 
-                  #{deskx,jdbcType=DOUBLE},#{desky,jdbcType=DOUBLE},#{deskz,jdbcType=DOUBLE},#{deskw,jdbcType=DOUBLE},
+          values (#{id,jdbcType=CHAR}, #{number,jdbcType=VARCHAR}, #{alias,jdbcType=DECIMAL}, #{memo,jdbcType=VARCHAR}, 1,
+                  #{desk_type,jdbcType=TINYINT},#{deskx,jdbcType=DOUBLE},#{desky,jdbcType=DOUBLE},#{deskz,jdbcType=DOUBLE},#{deskw,jdbcType=DOUBLE},
                   #{deskv,jdbcType=DOUBLE},#{deskq,jdbcType=DOUBLE},#{updater_fk,jdbcType=CHAR},#{creator_fk,jdbcType=CHAR},now(), now()
                   )
         </insert>
