@@ -20,7 +20,7 @@ public class PmsProduct extends PaginationParam{
 
     private String memo;
 
-    private int valid;
+    private int valid = 1;
 
     private String updater_fk;
 
