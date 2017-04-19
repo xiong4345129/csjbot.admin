@@ -59,11 +59,17 @@ $(function() {
 					style : "operation-column"
 				}],
 				columnDefs: [
-	           {
+				{
+					targets: [1],
+					render: function(data, type, row){
+						return "<div style='word-break:break-all;overflow-y:scroll;overflow:auto;max-height:10rem;'>"+data+"</div>";
+					}
+				},
+	            {
 	               targets: [ 5 ],
 	               render: operation,
 	               orderable: false
-	           }],
+	            }],
 		        remoteSort : true,
 				pagination : true,
 				paginationParam : {
