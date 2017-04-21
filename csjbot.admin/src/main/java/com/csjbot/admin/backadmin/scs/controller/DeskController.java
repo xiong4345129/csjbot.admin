@@ -149,7 +149,8 @@ public class DeskController {
 	    */
 	    @RequestMapping(value = "/search", method = RequestMethod.POST)
 	    public ResponseEntity<ResultEntity> page(HttpServletRequest request, HttpServletResponse response) {
-	        ResultEntity result = null;
+	       System.err.println("**********************");
+	    	ResultEntity result = null;
 	        try {
 	            Map<String, Object> params = new HashMap<String, Object>();
 	            int length = Integer.valueOf(request.getParameter("length"));
