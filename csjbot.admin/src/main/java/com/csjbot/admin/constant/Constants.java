@@ -55,14 +55,19 @@ public class Constants {
 			public final static String ADVERTISMENT_AUDIO = "ADVERTISMENT_AUDIO";   //广告声频
 			public final static String CUSTOMER_BASIC_INFO = "CUSTOMER_BASIC_INFO"; //商户基本信息
 			public final static String VERSION_ROBOT_FILE = "VERSION_ROBOT_FILE"; //前台版本包
+			public final static String DESK_BASIC_INFO = "DESK_BASIC_INFO"; 
+			public final static String DISH_PIC = "DISH_PIC";    //菜品图片
+			public final static String SC_ACCESSORY = "SC_ACCESSORY";   //送餐附件
 			
 		}
 		public class Path {
 			public final static String PRODUCT_PIC_PATH = "/pms/";
 			public final static String ADVERTISMENT_FILE_PATH = "/ams/";
 			public final static String VERSION_ROBOT_FILE_PATH = "/tms/";
+			public final static String SC_ACCESSORY_FILE_PATH = "/scs/";
 		}
 	}
 	
 	
 }
+
