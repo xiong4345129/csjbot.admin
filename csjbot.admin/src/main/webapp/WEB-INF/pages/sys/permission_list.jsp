@@ -12,7 +12,7 @@
 <head>
     <jsp:include page="../common/meta.jsp" />
     <jsp:include page="../common/resources.jsp" />
-    <script src="${path }/scripts/sys/permission_list.js"></script>
+    <script src="${path }/scripts/sys/version_robot_list.js"></script>
     <script src="${path }/scripts/plugins/datatable/jquery.csjbotui.datatable.js"></script>
     <style>
       .dk_container{

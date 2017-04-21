@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,11 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.csjbot.admin.backadmin.scs.service.ScsService;
-import com.csjbot.admin.backadmin.sys.service.SysAttachService;
 import com.csjbot.admin.constant.Constants;
-import com.csjbot.admin.data.pms.model.PmsProduct;
 import com.csjbot.admin.data.scs.model.ScsDesk;
-import com.csjbot.admin.data.sys.model.SysAttachment;
 import com.csjbot.admin.data.ums.model.User;
 import com.csjbot.admin.page.Page;
 import com.csjbot.admin.util.StringUtil;
@@ -41,13 +37,8 @@ import com.csjbot.admin.web.entity.ResultEntityHashMapImpl;
 @RequestMapping("/scs")
 public class DeskController {
 	
-	private Logger logger = Logger.getLogger(DeskController.class);
-	
 	@Autowired
 	private ScsService scsService;
-	
-	@Autowired
-	private SysAttachService attachService;
 	
 	/**
 	 * @discription桌号列表页
@@ -82,7 +73,6 @@ public class DeskController {
 		ScsDesk desk = scsService.selectByPrimaryKey(id);
 		ModelAndView mv = new ModelAndView("scs/desk_detail");
 		mv.addObject("desk",desk);
-		mv.addObject("location","/attach/"+desk.getId()+"/"+Constants.Attachment.Type.DESK_BASIC_INFO+"/pic");
 		return mv;
 	}
 	
@@ -103,14 +93,6 @@ public class DeskController {
 		scsDesk.setCreator_fk(loginUser.getId());
 		scsDesk.setUpdater_fk(loginUser.getId());
 		String msg = "";
-		SysAttachment attach = new SysAttachment();
-		attach.setTransaction_id(id);
-		attach.setTransaction_type(Constants.Attachment.Type.DESK_BASIC_INFO);
-		attach.setOwner_fk(loginUser.getId());
-		attach.setCreator_fk(loginUser.getId());
-		attach.setUpdater_fk(loginUser.getId());
-		attach.setMemo(scsDesk.getMemo());
-		attach.setSort(0);
 		if(scsService.insert(scsDesk)){
 			msg = ResultEntity.KW_STATUS_SUCCESS;
 		}
@@ -130,9 +112,7 @@ public class DeskController {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    response.setCharacterEncoding("UTF-8");
 	    String msg = ResultEntity.KW_STATUS_SUCCESS;
-	    ScsDesk scsDesk   = scsService.selectByPrimaryKey(id);
 	    try {
-	    	attachService.deleteByTransInfo(scsDesk.getId(),Constants.Attachment.Type.DESK_BASIC_INFO);
 	    	scsService.delete(id);
 		} catch (Exception e) {
 			msg=e.getMessage();

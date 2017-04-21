@@ -37,8 +37,8 @@ public class Constants {
 	public class DataDictionary{
 		/**产品分类**/
 		public final static String CPFL = "CPFL"; 
-		/**支付方法**/
-		public final static String ZFFF = "ZFFF"; 
+		/**笨笨类型**/
+		public final static String BBLX = "BBLX"; 
 	}
 	
 	public class Status{
@@ -54,12 +54,13 @@ public class Constants {
 			public final static String ADVERTISMENT_VEDIO = "ADVERTISMENT_VEDIO";   //广告视频
 			public final static String ADVERTISMENT_AUDIO = "ADVERTISMENT_AUDIO";   //广告声频
 			public final static String CUSTOMER_BASIC_INFO = "CUSTOMER_BASIC_INFO"; //商户基本信息
-			public final static String DESK_BASIC_INFO = "DESK_BASIC_INFO"; //商户基本信息
+			public final static String VERSION_ROBOT_FILE = "VERSION_ROBOT_FILE"; //前台版本包
 			
 		}
 		public class Path {
 			public final static String PRODUCT_PIC_PATH = "/pms/";
 			public final static String ADVERTISMENT_FILE_PATH = "/ams/";
+			public final static String VERSION_ROBOT_FILE_PATH = "/tms/";
 		}
 	}
 	
