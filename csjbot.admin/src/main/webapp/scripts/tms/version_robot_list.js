@@ -113,7 +113,7 @@ function operation( data, type, row ) {
 	     });    
 	    $(document).off("click", "#delete_" + row.id).on("click", "#delete_" + row.id, function(){
 	       	 csjbotui.ui.msg.confirm({
-	 		        title : "警告",
+	 		        title : "确认删除",
 					msg : "您确定要删除该版本【"+row.version_name+"】?",
 					ok:function(){
 						 $.ajax({

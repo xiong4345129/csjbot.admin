@@ -97,7 +97,7 @@ function operation( data, type, row ) {
 	     });    
 	    $(document).off("click", "#delete_" + row.code_group + row.code).on("click", "#delete_" + row.code_group + row.code, function(){
 	       	 csjbotui.ui.msg.confirm({
-	 		        title : "警告",
+	 		        title : "确认删除",
 					msg : "您确定要删除该商戶【"+row.customer+"】?",
 					ok:function(){
 						 $.ajax({

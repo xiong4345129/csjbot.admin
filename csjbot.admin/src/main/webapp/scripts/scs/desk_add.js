@@ -10,9 +10,11 @@ $(function(){
 	                rangelength:[0, 100]
 	            },
 	            alias : {  
+	            	required : true,
 	                rangelength:[0, 100]
 	            },
 	            desk_type : {  
+	            	required : true,
 	                isFloatNum3:true,
 	                rangelength:[0, 2]
 	            },
@@ -38,6 +40,12 @@ $(function(){
 	        messages : {    
 	        	number : {  
 	                required : "必须填写桌号."
+	            },
+	            alias : {  
+	                required : "必须填写桌号别名."
+	            },
+	            desk_type : {  
+	                required : "必须填写桌位类型."
 	            },
 	        },
 	        highlight : function(element) {  
