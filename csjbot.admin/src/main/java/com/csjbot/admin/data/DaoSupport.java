@@ -16,11 +16,15 @@ public interface DaoSupport {
 
     public int update(String statement, Object parameter);
     
+    public <K, V, T> T get(String statement,String primaryKey);
+    
     public <K, V, T> T get(String statement, Map<K, V> parameter);
 
     public <K, V> Map<K, V> findOne(String statement, Map<K, V> parameter);
 
     public <K, V> int delete(String statement, Map<K, V> parameter);
+    
+    public <K, V> int delete(String statement, String primaryKey);
 
     public <E, K, V> List<E> find(String statement, Map<K, V> parameter);
 
