@@ -70,7 +70,7 @@ function previewImage(file, flag) {
 			div.innerHTML = "<div id=divhead style='width:" + rect.width + "px;height:" + rect.height + "px;margin-top:" + rect.top + "px;" + sFilter + src + "\"'></div>";
 		    }
 		 else{
-	          csjbotui.ui.msg.alert("请选择正确的图片文件");
+	          csjbotui.ui.msg.alert("请选择正确的图片文件！");
 	          document.getElementById("photo").value="";
 	          div.innerHTML = '<img id=imghead width=200 height=150 src=${path }/images/nophoto.jpg>'; 
 		   }
