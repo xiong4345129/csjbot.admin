@@ -49,7 +49,7 @@
 	                            <tr>
 	                                <td style="width: 15%;text-align: left;">菜品管理</td>
 	                                <td style="width: 10%;text-align: right;">
-	                                       <a type="button" class="btn btn-primary" href="${path}/dte/toDishTypeAdd">新增菜品</a>
+	                                       <a type="button" class="btn btn-primary" href="${path}/dish/toDishAdd">新增菜品</a>
 	                                </td>
 	                            </tr>
 		                      </table>		                 

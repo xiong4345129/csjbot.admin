@@ -96,8 +96,8 @@ function operation( data, type, row ) {
 	});
 	    $(document).off("click", "#delete_" + row.id).on("click", "#delete_" + row.id, function(){
 	       	 csjbotui.ui.msg.confirm({
-	 		        title : "警告",
-					msg : "您确定要删除该产品【"+row.number+"】?",
+	 		        title : "确认删除",
+					msg : "您确定要删除该菜类【"+row.type_name+"】?",
 					ok:function(){
 						 $.ajax({
 			        		type : "POST",

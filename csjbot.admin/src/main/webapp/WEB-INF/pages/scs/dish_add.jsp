@@ -38,7 +38,7 @@
 							<table style="width: 99%;">
 								<tr>
 									<td style="width: 4%;text-align: left;"><a
-										class="btn btn-primary" type="button" href="${path}/pms/list">返回</a></td>
+										class="btn btn-primary" type="button" href="${path}/dish/list">返回</a></td>
 									<td class="panel-title"
 										style="width: 96%;text-align: center;font-weight:bold">新增菜品</td>
 								</tr>
