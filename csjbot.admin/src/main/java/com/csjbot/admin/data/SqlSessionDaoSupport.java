@@ -30,6 +30,10 @@ public class SqlSessionDaoSupport implements DaoSupport {
 	public int update(String statement, Object parameter) {
 		return sqlSession.update(statement, parameter);
 	}
+	
+	public <K, V, T> T get(String statement, String key) {
+		return sqlSession.selectOne(statement, key);
+	}
 
 	public <K, V, T> T get(String statement, Map<K, V> parameter) {
 		return sqlSession.selectOne(statement, parameter);
@@ -43,6 +47,11 @@ public class SqlSessionDaoSupport implements DaoSupport {
 	@Override
 	public <K, V> int delete(String statement, Map<K, V> parameter) {
 		return sqlSession.delete(statement, parameter);
+	}
+	
+	@Override
+	public <K, V> int delete(String statement, String primaryKey) {
+		return sqlSession.delete(statement, primaryKey);
 	}
 
 	@Override

@@ -38,7 +38,7 @@ $(function() {
 					data : "name",
 					width : "15%"
 				}, {
-					title : "价格",
+					title : "价格(元)",
 					data : "price",
 					width : "15%"
 				}, {
@@ -56,7 +56,7 @@ $(function() {
 					style : "operation-column"
 				}],
 				columnDefs: [{ 
-		               targets: [ 3 ],
+					   targets: [ 3 ],
 		               render: function ( data, type, row ) {
 		            	   var datetime = new Date(Number(row.date_create)).Format( "yyyy-MM-dd HH:mm");
 		                   return datetime;
@@ -76,6 +76,7 @@ $(function() {
 				},
 		        emptyMsg : "查无结果"
 		 };
+		
 		 return options;
 	}
 	initable = initOptions();
@@ -96,7 +97,7 @@ function operation( data, type, row ) {
 	     });    
 	    $(document).off("click", "#delete_" + row.id).on("click", "#delete_" + row.id, function(){
 	       	 csjbotui.ui.msg.confirm({
-	 		        title : "警告",
+	 		        title : "确认删除",
 					msg : "您确定要删除该产品【"+row.name+"】?",
 					ok:function(){
 						 $.ajax({

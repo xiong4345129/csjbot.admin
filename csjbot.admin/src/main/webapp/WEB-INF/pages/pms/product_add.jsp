@@ -28,7 +28,7 @@
                         </li>
                         <li class="active">迎宾机器人</li>
                         <li><a href="${path}/pms/list">产品管理</a></li>
-                        <li class="active">新增产品</li>
+                        <li class="active">产品新增</li>
                     </ul><!-- .breadcrumb -->
                 </div>
             

@@ -8,7 +8,10 @@
         <result column="file_path" property="path"/>
         <result column="upload_time" property="uploadTime"/>
     </resultMap>
-
+    <resultMap id="FileEntryMap" type="com.csjbot.admin.data.tms.model.FileEntry">
+        <result column="file" property="path"/>
+        <result column="uptime" property="uptime"/>
+    </resultMap>
     <!--auto generated Code-->
     <sql id="all_column">
         `id`,
@@ -80,5 +83,14 @@
         ORDER BY 1
     </select>
 
+    <select id="getLike" resultMap="FileEntryMap" parameterType="map">
+        SELECT
+        <![CDATA[ CONCAT(IF(path <> '/', path, ''), '/', name) path, uptime ]]>
+        FROM
+        (SELECT file_path path, file_name name, upload_time uptime
+        FROM tms_package_file
+        WHERE file_name LIKE CONCAT('%',#{ptn},'%')) AS t
+        ORDER BY ${col} DESC;
+    </select>
 </mapper>
 

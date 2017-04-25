@@ -1,7 +1,11 @@
 package com.csjbot.admin.backadmin.tms.controller;
 
+import com.csjbot.admin.backadmin.tms.model.Result;
+import com.csjbot.admin.backadmin.tms.model.Result.PreDefined;
 import com.csjbot.admin.backadmin.tms.service.FSStoreService;
 import com.csjbot.admin.backadmin.tms.service.PkgFileService;
+import com.csjbot.admin.backadmin.tms.service.impl.FileUploadProperties;
+import com.csjbot.admin.data.tms.model.FileEntry;
 import com.csjbot.admin.data.tms.model.PkgFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -36,10 +41,18 @@ public class VersionController {
     @Autowired
     private FSStoreService storeService;
 
+    private final String downloadBaseUrl;
+
+    @Autowired
+    public VersionController(FileUploadProperties properties) {
+        downloadBaseUrl = properties.getBaseUrl();
+    }
+
     @RequestMapping(value = "/versionControl", method = RequestMethod.GET)
     public String versionView(Model model) {
         List<PkgFile> fileList = fileDBService.getAll();
-        model.addAttribute("pkgFile", fileList);
+        model.addAttribute("fileList", fileList);
+        model.addAttribute("baseUrl", downloadBaseUrl);
         return "tms/version";
     }
 
@@ -63,6 +76,8 @@ public class VersionController {
     @RequestMapping(value = "/listdir", method = RequestMethod.GET)
     public ResponseEntity<String> listDir() {
         List<String> dirs = fileDBService.getDistinctPaths();
+        if (dirs == null || dirs.size() == 0)
+            dirs = Collections.singletonList("/");
         String dirJson;
         try {
             dirJson = mapper.writeValueAsString(dirs);
@@ -90,14 +105,16 @@ public class VersionController {
         if (!storeService.checkDirStrSyntax(dirStr)) {
             return textResponse(BAD_REQUEST, "文件夹不符合格式");
         }
-        if (!storeService.createDir(dirStr)) {
-            return textResponse(FORBIDDEN, "存在同名文件");
+        Result createDirRes = storeService.createDir(dirStr);
+        if (!createDirRes.isSuccess()) {
+            return textResponse(createDirRes);
         }
-        if (storeService.isFileExists(dirStr, file)) {
-            return textResponse(FORBIDDEN, "存在同名文件(夹)");
+        if (storeService.fileExists(dirStr, file.getOriginalFilename())) {
+            return textResponse(Result.from(PreDefined.EXISTING_FILE));
         }
-        if (!storeService.store(dirStr, file)) {
-            return textResponse(INTERNAL_SERVER_ERROR, "保存出错");
+        Result storeFileRes = storeService.store(dirStr, file);
+        if (!storeFileRes.isSuccess()) {
+            return textResponse(storeFileRes);
         }
         if (!createDBInfo(dirStr, file.getOriginalFilename())) {
             // todo how to handle errors??
@@ -105,6 +122,33 @@ public class VersionController {
         }
         return textResponse(OK, "上传成功");
     }
+
+    // // todo open permission in shiro or move to api project
+    // @RequestMapping(value = "/list", method = RequestMethod.GET)
+    // public ResponseEntity<String> findByPattern(@RequestParam("nameptn") String namePtn,
+    //                                             @RequestParam(value = "orderby", required = false) Integer orderBy) {
+    //     if (namePtn == null || !namePtn.matches(NAME_PTN_REGEX))
+    //         return textResponse(BAD_REQUEST, "查询字串不符合格式，" +
+    //             "仅支持数字、英文字母、英文句号、下划线和连字符, 至少3字符");
+    //     if (orderBy == null) orderBy = 1;
+    //     List<FileEntry> files = fileDBService.findByName(namePtn, orderBy);
+    //     String json = toJson(files);
+    //     HttpHeaders headers = new HttpHeaders();
+    //     headers.setContentType(MediaType.APPLICATION_JSON);
+    //     return json == null ?
+    //         textResponse(INTERNAL_SERVER_ERROR, "JSON序列化出错") : new ResponseEntity<>(json, headers, OK);
+    // }
+
+    // private static final String NAME_PTN_REGEX = "[0-9a-zA-Z-_.]{3,20}"; // todo
+
+    // private String toJson(Object obj) {
+    //     try {
+    //         return mapper.writeValueAsString(obj);
+    //     } catch (JsonProcessingException e) {
+    //         LOGGER.error("json serialize", e);
+    //     }
+    //     return null;
+    // }
 
     private boolean createDBInfo(String filePath, String fileName) {
         PkgFile file = new PkgFile(fileName, filePath, new Date());
@@ -115,10 +159,13 @@ public class VersionController {
         return (fileDBService.delete(fileId) == 1);
     }
 
+    private ResponseEntity<String> textResponse(Result res) {
+        return textResponse(res.getStatus(), res.getMessage());
+    }
+
     private ResponseEntity<String> textResponse(HttpStatus status, String msg) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         return new ResponseEntity<>(msg, headers, status);
     }
-
 }
